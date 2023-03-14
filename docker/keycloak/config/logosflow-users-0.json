@@ -1,0 +1,95 @@
+{
+  "realm" : "logosflow",
+  "users" : [ {
+    "id" : "c7572fbd-ece2-443f-bb86-aee546f779c9",
+    "createdTimestamp" : 1678317203971,
+    "username" : "logosflow",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : true,
+    "firstName" : "logosflow",
+    "lastName" : "logosflow",
+    "email" : "logosflow.app@mail.com",
+    "credentials" : [ {
+      "id" : "0f6798f5-8ac0-4855-b960-58ca4f7e64d2",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1678739808255,
+      "secretData" : "{\"value\":\"ju4Eht9VIK4NGgNVrT1/mzQ7lzTs6RA1WvRELcBS+fQ=\",\"salt\":\"F0nGAeiH2598s/+0lQf6tA==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "uma_authorization", "default-roles-logosflow", "offline_access" ],
+    "clientRoles" : {
+      "realm-management" : [ "query-groups", "view-identity-providers", "manage-realm", "manage-clients", "manage-users", "impersonation", "view-realm", "query-realms", "view-users", "view-authorization", "manage-identity-providers", "manage-authorization", "create-client", "query-clients", "realm-admin", "manage-events", "view-events", "query-users", "view-clients" ],
+      "broker" : [ "read-token" ],
+      "account" : [ "view-applications", "delete-account", "manage-consent", "view-profile", "view-consent", "manage-account-links", "manage-account" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ "/LOGOS_ADMIN_GROUP", "/LOGOS_GROUP", "/LOGOS_GUEST_GROUP", "/LOGOS_USER_GROUP" ]
+  }, {
+    "id" : "186a54b2-a1d8-41cd-8e5e-16a985bf9701",
+    "createdTimestamp" : 1678744209183,
+    "username" : "logosguest",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : true,
+    "firstName" : "logosguest",
+    "lastName" : "logosguest",
+    "email" : "logosguest@gmail.com",
+    "credentials" : [ {
+      "id" : "a96b0bb7-4336-4eec-9af4-177e313d696e",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1678744225471,
+      "secretData" : "{\"value\":\"WmbRoP22oAjimvaWfEtIx7KZriSF9pfv+D9hg1IBB6o=\",\"salt\":\"Tpv3t0erxsGY8jLR+Nssdg==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-logosflow" ],
+    "notBefore" : 0,
+    "groups" : [ "/LOGOS_GROUP", "/LOGOS_GUEST_GROUP" ]
+  }, {
+    "id" : "103e29a6-d28d-4803-b3d0-c760bf29afeb",
+    "createdTimestamp" : 1678741853497,
+    "username" : "logosuser",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : true,
+    "firstName" : "logosuser",
+    "lastName" : "logosuser",
+    "email" : "logosuser@gmail.com",
+    "credentials" : [ {
+      "id" : "6de205d1-7b07-496e-afba-2c51d812cde1",
+      "type" : "password",
+      "userLabel" : "My password",
+      "createdDate" : 1678741876547,
+      "secretData" : "{\"value\":\"hv/C7N6/r5wWXbYvmtd8LzkKbF0yjGEKgIc0HMK+yyY=\",\"salt\":\"bQOj85Xy5WX3m18FSXfzAQ==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-logosflow" ],
+    "notBefore" : 0,
+    "groups" : [ "/LOGOS_GROUP", "/LOGOS_GUEST_GROUP", "/LOGOS_USER_GROUP" ]
+  }, {
+    "id" : "51b97cce-ea4d-4aac-822e-79aecb9c50d1",
+    "createdTimestamp" : 1678790974007,
+    "username" : "service-account-logosflow-backend-confidential",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "serviceAccountClientId" : "logosflow-backend-confidential",
+    "credentials" : [ ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "default-roles-logosflow" ],
+    "clientRoles" : {
+      "logosflow-backend-confidential" : [ "uma_protection" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  } ]
+}

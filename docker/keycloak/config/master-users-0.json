@@ -1,0 +1,26 @@
+{
+  "realm" : "master",
+  "users" : [ {
+    "id" : "777e8952-df3a-40a3-9212-25f5cae94917",
+    "createdTimestamp" : 1678317004876,
+    "username" : "logosadmin",
+    "enabled" : true,
+    "totp" : false,
+    "emailVerified" : false,
+    "credentials" : [ {
+      "id" : "5af32876-e832-43e4-b126-75476692562e",
+      "type" : "password",
+      "createdDate" : 1678317005015,
+      "secretData" : "{\"value\":\"9+qDBHXLBBgAYxN5GpyratKYPLNc8ZAvmoj72u/kVZLAunyeXNvwgxltQXeTr3TYn/8CgEnbEn9g81ulo0BoSQ==\",\"salt\":\"RHcEfNFoxJuyURsXcMYxaQ==\",\"additionalParameters\":{}}",
+      "credentialData" : "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+    } ],
+    "disableableCredentialTypes" : [ ],
+    "requiredActions" : [ ],
+    "realmRoles" : [ "admin", "default-roles-master" ],
+    "clientRoles" : {
+      "logosflow-realm" : [ "manage-users", "manage-clients", "view-events", "manage-identity-providers", "manage-authorization", "query-clients", "query-users", "view-clients", "view-identity-providers", "view-authorization", "query-realms", "manage-events", "view-realm", "view-users", "create-client", "query-groups", "manage-realm" ]
+    },
+    "notBefore" : 0,
+    "groups" : [ ]
+  } ]
+}
