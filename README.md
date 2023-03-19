@@ -1,27 +1,49 @@
 # LogosFlow
 The project for management, interaction and collaboration
 
+## Deployment (Java)
+
+To install Java applications (in project directory) run command:
+```shell
+mvn clean install
+```
+
 ## Deployment (Docker)
 
 ### Local
 
 Configure network access required to Keycloak by adding `host.docker.internal` to `/etc/hosts`:
 ```shell
-$ cat /etc/hosts
+cat /etc/hosts
 [...]
 127.0.0.1: host.docker.internal
 ```
 ## Start the project containers:
 - Run docker-compose:
 ```shell
-$ docker-compose up --build --force-recreate
+docker-compose up --build --force-recreate
 ```
 
 ## Stop the project containers:
 - Run docker-compose:
 ```shell
-$ docker-compose down
+docker-compose down
 ```
+
+## Start Java applications:
+
+in order to start each application (for instance, logosflow-eureka-discovery-service,  logosflow-gateway ect):
+
+```shell
+java -jar logosflow-eureka-discovery-service/target/logosflow-eureka-discovery-service.jar
+```
+
+or using maven (in directory of corresponding pom.xml):
+
+```shell
+mvn spring-boot:run
+```
+
 
 ## Keycloak
 

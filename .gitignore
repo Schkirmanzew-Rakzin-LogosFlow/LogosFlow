@@ -1,1 +1,10 @@
+/demo-rest-controller-app.iml
+/logosflow-eureka-configuration.iml
+/logosflow-eureka-discovery-service.iml
+/notes.txt
+/.idea/
+/*/target
+/*/target/
+/demo-rest-controller-app/target/
+/*.iml
 /.idea/.gitignore
