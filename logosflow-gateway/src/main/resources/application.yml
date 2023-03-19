@@ -1,0 +1,25 @@
+server:
+  port: 8088
+
+spring:
+  application:
+    name: logosflow-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: demo-rest-controller-app
+          uri: lb://demo-rest-controller-app
+          predicates:
+            - Path=/demo/controller/rest/resources/timed-resource
+            - Method=POST
+          filters:
+            - RemoveRequestHeader=Cookie
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${LOGOSFLOW_GATEWAY_INSTANCE_ID:${random.value}}
+  serviceUrl:
+    defaultZone: ${EUREKA_URI:http://${eureka.serviceHost}:${eureka.servicePort:8761}/eureka}
+  # Custom properties
+  serviceHost: ${EUREKA_HOST:localhost}
+  servicePort: ${EUREKA_PORT:8761}
