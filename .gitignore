@@ -8,3 +8,5 @@
 /demo-rest-controller-app/target/
 /*.iml
 /.idea/.gitignore
+*.iml
+/*/*.iml
