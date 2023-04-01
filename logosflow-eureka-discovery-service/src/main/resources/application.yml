@@ -6,6 +6,10 @@ spring:
     name: ${EUREKA_SERVICE_NAME:eureka-discovery-service}
 
 eureka:
+  server:
+    enable-self-preservation: true
+    renewalPercentThreshold: 0.33 # This is only if one server is started
+    wait-time-in-ms-when-sync-empty: 1000
   instance:
     hostname: ${EUREKA_HOST:localhost}
     instance-id: ${spring.application.name}:${instanceId:${random.value}}
