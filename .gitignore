@@ -10,3 +10,5 @@
 /.idea/.gitignore
 *.iml
 /*/*.iml
+/.vscode/launch.json
+/.vscode/settings.json
