@@ -25,12 +25,12 @@ class OnOAuth2AuthorizedHandler {
       }
     } catch (error) {
       console.log("Error exchanging code for OIDC Tokens", error);
-      Oauth2LoginLogoutManager.logout();
+      await Oauth2LoginLogoutManager.logout();
     } finally {
       closeAuthDialogWindow(dialogWindow);
     }
 
-    Oauth2LoginLogoutManager.logout();
+    await Oauth2LoginLogoutManager.logout();
 
     function closeAuthDialogWindow(dialogWindow) {
       try {

@@ -25,7 +25,7 @@ export class Oauth2LoginLogoutManager {
       await Oauth2LoginLogoutManager.forceLogin();
     } catch (error) {
       console.error(error);
-      Oauth2LoginLogoutManager.logout();
+      await Oauth2LoginLogoutManager.logout();
     }
   }
 
@@ -61,14 +61,31 @@ export class Oauth2LoginLogoutManager {
     await Oauth2LoginLogoutManager.waitUntilLoginIsSuccessful();
   }
 
-  static logout() {
+  static async logout() {
+    const config = await OidcClientConfiguration.get();
+    const idToken = OidcTokensStorage.getIdToken();
     Oauth2LoginLogoutManager.clearOauth2StoredData();
+
+    if (!idToken) {
+      console.error('No id_token found in local storage. Please authenticate first.');
+      return;
+    }
+
+    const endSessionUrl = new URL(config.endSessionEndpoint);
+    endSessionUrl.searchParams.append('id_token_hint', idToken);
+    endSessionUrl.searchParams.append('post_logout_redirect_uri', window.location.origin);
+
+    Oauth2LoginLogoutManager.redirectTo(endSessionUrl.href);
   }
 
   static clearOauth2StoredData() {
     PageStateStorage.clear();
     PkceCodeChallengeVerifierStorage.clearPair();
     OidcTokensStorage.clear();
+  }
+
+  static redirectTo(reference) {
+    window.location.href = reference;
   }
 };
 
