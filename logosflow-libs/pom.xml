@@ -10,10 +10,10 @@
     </parent>
 
     <groupId>io.logosflow.modules</groupId>
-    <artifactId>spa-demo-endpoint</artifactId>
+    <artifactId>logosflow-libs</artifactId>
     <packaging>jar</packaging>
 
-    <name>spa-demo-endpoint</name>
+    <name>logosflow-libs</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -95,7 +95,7 @@
     </pluginRepositories>
 
     <build>
-        <finalName>spa-demo-endpoint</finalName>
+        <finalName>logosflow-libs</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

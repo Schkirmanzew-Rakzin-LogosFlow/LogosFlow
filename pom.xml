@@ -21,6 +21,7 @@
         <module>logosflow-eureka-server-dependencies</module>
         <module>logosflow-gateway</module>
         <module>spa-demo-endpoint</module>
+        <module>logosflow-libs</module>
     </modules>
     <properties>
         <maven-enforcer-plugin.version>3.2.1</maven-enforcer-plugin.version>
