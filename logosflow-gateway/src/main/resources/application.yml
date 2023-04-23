@@ -23,12 +23,17 @@ spring:
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
+        - id: libraries-server
+          uri: lb://libraries-server
+          predicates:
+            - Path=/resources/libraries/**
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
         - id: spa-demo-app
           uri: lb://spa-demo-app
           predicates:
             - Path=/index.html,/,/authcodeReader.html,/scripts/**
-#            - Path=/
-#            - Path=/index.html
             - Method=GET
 
 eureka:
