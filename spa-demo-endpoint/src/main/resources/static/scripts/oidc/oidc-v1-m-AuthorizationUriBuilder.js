@@ -6,14 +6,24 @@ class AuthorizationUriBuilder {
     static buildUriFor(
         { authorizationEndpoint, clientId, redirectUri, scope, responseType },
         state,
-        codeChallenge
+        codeChallenge,
+        scopes = []
     ) {
+        let scopesList;
+        if (typeof scopes == 'string') {
+            scopesList = scopes.split(' ');
+        } else if (Array.isArray(scopes)) {
+            scopesList = scopes;
+        }
+
+        scopesList = AuthorizationUriBuilder.mergeScopes(scopesList, scope);
+
         const authorizationUrl = new URL(authorizationEndpoint);
         const searchParams = authorizationUrl.searchParams;
 
         searchParams.set("client_id", clientId);
         searchParams.set("redirect_uri", redirectUri);
-        searchParams.set("scope", scope);
+        searchParams.set("scope", scopesList.join(" "));
         searchParams.set("response_type", responseType);
         searchParams.set("state", state);
         searchParams.set("code_challenge", codeChallenge);
@@ -21,6 +31,10 @@ class AuthorizationUriBuilder {
 
         return authorizationUrl;
     };
+
+    static mergeScopes(scopes, scope) {
+        return scopes.concat(scope.split(" "));
+    }
 };
 
 export default AuthorizationUriBuilder;

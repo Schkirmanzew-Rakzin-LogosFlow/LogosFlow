@@ -13,6 +13,7 @@ class OidcTokensStorage {
   static REFRESH_TOKEN_EXPIRATION_TIME_KEY = "refresh_token_exp_time";
   static ID_TOKEN_EXPIRATION_TIME_KEY = "id_token_exp_time";
   static SCOPES = "scope";
+  static SESSION_STATE_KEY = "session_state";
   static EXPIRATION_TIME_BUFFER_STOCK = 5 * 1000; // 5 seconds
 
   /** 
@@ -23,7 +24,9 @@ class OidcTokensStorage {
         "token_type": "Bearer",
         "expires_in": 300,
         "refresh_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6IC...",
-        "scope": "email profile"
+        "scope": "email profile",
+        "id_token": "your_id_token",
+        "session_state": "your_session_state"
       }
    * @throws {Error} if the refresh token is invalid or expired.
       {
@@ -48,6 +51,7 @@ class OidcTokensStorage {
       OidcTokensStorage.expirationTimeUtcOfIdToken(oidcTokens)
     );
     window.localStorage.setItem(OidcTokensStorage.SCOPES, oidcTokens["scope"]);
+    window.localStorage.setItem(OidcTokensStorage.SESSION_STATE_KEY, oidcTokens["session_state"]);
 
     return oidcTokens;
   }
@@ -90,7 +94,7 @@ class OidcTokensStorage {
   /** 
    * @returns {Number} UTC +0 in milliseconds
    */
-  static getAccessTokenExpirationTimeUtc() {
+  static getIdTokenExpirationTimeUtc() {
     return Number(window.localStorage.getItem(OidcTokensStorage.ID_TOKEN_EXPIRATION_TIME_KEY));
   }
 
@@ -105,6 +109,10 @@ class OidcTokensStorage {
     return scopes;
   }
 
+  static getSessionState() {
+    return window.localStorage.getItem(OidcTokensStorage.SESSION_STATE_KEY);
+  }
+
   static clear() {
     window.localStorage.removeItem(OidcTokensStorage.ACCESS_TOKEN_KEY);
     window.localStorage.removeItem(OidcTokensStorage.ACCESS_TOKEN_EXPIRATION_TIME_KEY);
@@ -113,6 +121,7 @@ class OidcTokensStorage {
     window.localStorage.removeItem(OidcTokensStorage.ID_TOKEN_KEY);
     window.localStorage.removeItem(OidcTokensStorage.ID_TOKEN_EXPIRATION_TIME_KEY);
     window.localStorage.removeItem(OidcTokensStorage.SCOPES);
+    window.localStorage.removeItem(OidcTokensStorage.SESSION_STATE_KEY);
   }
 
   /** 

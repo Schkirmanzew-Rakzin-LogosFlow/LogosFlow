@@ -22,7 +22,7 @@ class AccesTokenManager {
       return accessToken;
     }
 
-    return await AccesTokenManager.refreshAndGetAccessToken();
+    return await AccesTokenManager.refreshAndGetAccessToken(scopes);
   }
 
   static async isAuthenticationSuccessful() {
@@ -77,11 +77,11 @@ class AccesTokenManager {
     return scopesList.every(scope => storedTokenScopes.has(scope));
   }
 
-  static async refreshAndGetAccessToken() {
+  static async refreshAndGetAccessToken(scopes=[]) {
     const refreshToken = OidcTokensStorage.getRefreshToken();
 
     if (!refreshToken || OidcTokensStorage.isRefreshTokenExpired()) {
-      await Oauth2LoginLogoutManager.forceLogin();
+      await Oauth2LoginLogoutManager.forceLogin(scopes);
       if (await AccesTokenManager.isAuthenticationSuccessful()) {
         return await AccesTokenManager.getAccessToken();
       }
@@ -89,6 +89,11 @@ class AccesTokenManager {
     }
 
     const oidcTokens = await OidcTokenExchanger.requestRefreshedOidcTokens(refreshToken);
+    
+    if(OidcTokensStorage.getSessionState()!=oidcTokens.oidcTokens["session_state"]){
+      await Oauth2LoginLogoutManager.logout();
+    }
+
     OidcTokensStorage.storeOidcTokens(oidcTokens);
 
     return OidcTokensStorage.getAccessToken();

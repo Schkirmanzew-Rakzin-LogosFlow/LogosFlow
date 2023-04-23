@@ -26,6 +26,8 @@ export class OidcClientConfiguration {
       tokenEndpoint: data.token_endpoint,
       userInfoEndpoint: data.userinfo_endpoint,
       endSessionEndpoint: data.end_session_endpoint,
+      check_session_iframe: data.check_session_iframe,
+      session_state: data.session_state,
       clientId: window.OIDC_CLIENT_ID,
       redirectUri: window.location.origin + "/authcodeReader.html",
       scope: "openid email profile",

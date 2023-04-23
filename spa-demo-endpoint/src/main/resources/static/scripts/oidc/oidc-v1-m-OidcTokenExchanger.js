@@ -24,11 +24,15 @@ class OidcTokenExchanger {
     const accessTokenValue = tokenResponse.access_token;
     const refreshTokenValue = tokenResponse.refresh_token;
     const idTokenValue = tokenResponse.id_token;
+    const sessionStateValue = tokenResponse.session_state;
+    const scopes = tokenResponse.scope;
 
     let oidcTokens = {
       access_token: accessTokenValue,
       refresh_token: refreshTokenValue,
       id_token: idTokenValue,
+      session_state: sessionStateValue,
+      scope: scopes,
     };
 
     OidcTokenExchanger.cleanHistoryForCodeExchange();

@@ -4,6 +4,7 @@
 import AuthorizationUriBuilder from "./oidc-v1-m-AuthorizationUriBuilder.js";
 import AccesTokenManager from "./oidc-v1-m-AccesTokenManager.js";
 import OidcTokensStorage from "./oidc-v1-m-OidcTokensStorage.js";
+import { setupOIDCIFrame } from "./oidc-v1-m-setupOidcFrame.js";
 import { OidcClientConfiguration } from "./oidc-v1-pkce-lib.js";
 import PageStateStorage from "./oidc-v1-m-PageStateStorage.js";
 import PkceCodeChallengeVerifierGenerator from "./oidc-v1-m-PkceCodeChallengeVerifierGenerator.js";
@@ -15,6 +16,8 @@ import RedirectUserToAuthorization from "./oidc-v1-m-RedirectUserToAuthorization
 export class Oauth2LoginLogoutManager {
 
   static LOGIN_TIMEOUT_MS = 100;
+  static CHECK_SESSION_TIMEOUT_MS = 5000;
+  static OIDC_SESSION_IFRAME_ID = "oidc-session-iframe";
 
   static async login() {
     try {
@@ -23,13 +26,17 @@ export class Oauth2LoginLogoutManager {
       }
 
       await Oauth2LoginLogoutManager.forceLogin();
+      await (async function () {
+        await setupOIDCIFrame();
+        await Oauth2LoginLogoutManager.listenRemoteLogout()
+      })();
     } catch (error) {
       console.error(error);
       await Oauth2LoginLogoutManager.logout();
     }
   }
 
-  static async forceLogin() {
+  static async forceLogin(scopes=[]) {
     OidcTokensStorage.clear();
 
     let state = PageStateGenerator.generateState();
@@ -44,7 +51,8 @@ export class Oauth2LoginLogoutManager {
     let authorizationUrlWithPromptUi = AuthorizationUriBuilder.buildUriFor(
       await OidcClientConfiguration.get(),
       state,
-      codeChallenge
+      codeChallenge,
+      scopes
     );
 
     RedirectUserToAuthorization.redirectToUrl(authorizationUrlWithPromptUi);
@@ -86,6 +94,49 @@ export class Oauth2LoginLogoutManager {
 
   static redirectTo(reference) {
     window.location.href = reference;
+  }
+
+  static async listenRemoteLogout() {
+    const iframe = document.getElementById(Oauth2LoginLogoutManager.OIDC_SESSION_IFRAME_ID);
+    let checkInterval;
+    window.checkInterval = checkInterval;
+
+    const config = await OidcClientConfiguration.get();
+    const clientId = config.clientId;
+    const sessionState = OidcTokensStorage.getSessionState();
+
+    const iframeOrigin = new URL(iframe.src).origin;
+    const message = `${clientId} ${sessionState}`;
+
+    window.addEventListener('message', async (event) => {
+      if (event.origin !== iframeOrigin) {
+        return;
+      }
+
+      if (event.source === iframe.contentWindow) {
+        if (event.data === 'changed') {
+
+          clearInterval(checkInterval);
+          await Oauth2LoginLogoutManager.logout();
+
+        } else {
+          /* */
+        }
+      }
+    });
+
+    setTimer();
+
+    function setTimer() {
+      check_session();
+      checkInterval = setInterval(check_session, Oauth2LoginLogoutManager.CHECK_SESSION_TIMEOUT_MS);
+    };
+
+    function check_session() {
+      let win = window.parent.frames[Oauth2LoginLogoutManager.OIDC_SESSION_IFRAME_ID].contentWindow;
+      win.postMessage(message, iframeOrigin);
+    }
+
   }
 };
 
