@@ -6,6 +6,15 @@ spring:
     name: logosflow-gateway
   cloud:
     gateway:
+      globalcors:
+        add-to-simple-url-handler-mapping: true
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+
+
       routes:
         - id: demo-rest-controller-app
           uri: lb://demo-rest-controller-app
@@ -14,6 +23,18 @@ spring:
             - Method=POST
           filters:
             - RemoveRequestHeader=Cookie
+        - id: libraries-server
+          uri: lb://libraries-server
+          predicates:
+            - Path=/resources/libraries/**
+            - Method=GET
+          filters:
+            - RemoveRequestHeader=Cookie
+        - id: spa-demo-app
+          uri: lb://spa-demo-app
+          predicates:
+            - Path=/index.html,/,/authcodeReader.html,/scripts/**
+            - Method=GET
 
 eureka:
   instance:

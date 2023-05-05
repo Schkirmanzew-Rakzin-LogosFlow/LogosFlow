@@ -1,0 +1,15 @@
+server:
+  port: 0
+
+spring:
+  application:
+    name: libraries-server
+
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${LIBRARIES_SERVER_INSTANCE_ID:${random.value}}
+  serviceUrl:
+    defaultZone: ${EUREKA_URI:http://${eureka.serviceHost}:${eureka.servicePort}/eureka}
+  # Custom properties
+  serviceHost: ${EUREKA_HOST:localhost}
+  servicePort: ${EUREKA_PORT:8761}

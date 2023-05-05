@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Auth code Reader</title>
+    <!-- Load before DOM construction, but asynchronously -->
+    <script type="module">
+        import OidcV1PkceAuthCodeReader from '/resources/libraries/oidc/scripts/oidc-v1-pkce-auth-code-reader.js';
+        await OidcV1PkceAuthCodeReader.consumeRedirectedOauthCodeResponse();
+    </script>
+</head>
+
+<body></body>
+
+</html>
