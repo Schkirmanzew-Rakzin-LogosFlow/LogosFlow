@@ -14,57 +14,140 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>demo-rest-controller-app</module>
-        <module>logosflow-eureka-discovery-service</module>
+        <module>logosflow-spring-boot-core</module>
         <module>logosflow-eureka-configuration</module>
         <module>logosflow-eureka-client-dependencies</module>
         <module>logosflow-eureka-server-dependencies</module>
+        <module>logosflow-eureka-discovery-service</module>
+        <module>demo-rest-controller-app</module>
         <module>logosflow-gateway</module>
         <module>spa-demo-endpoint</module>
         <module>logosflow-libs</module>
     </modules>
+
     <properties>
-        <maven-enforcer-plugin.version>3.2.1</maven-enforcer-plugin.version>
         <logosflow-parent.version>1.0.0-SNAPSHOT</logosflow-parent.version>
+        <java.version>17</java.version>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven-enforcer-plugin.version>3.2.1</maven-enforcer-plugin.version>
+
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>io.logosflow.modules</groupId>
+                <artifactId>logosflow-spring-boot-core</artifactId>
+                <version>${logosflow-parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.logosflow.modules</groupId>
+                <artifactId>logosflow-eureka-configuration</artifactId>
+                <version>${logosflow-parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.logosflow.modules</groupId>
+                <artifactId>logosflow-eureka-client-dependencies</artifactId>
+                <version>${logosflow-parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.logosflow.modules</groupId>
+                <artifactId>logosflow-eureka-server-dependencies</artifactId>
+                <version>${logosflow-parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.logosflow.modules</groupId>
+                <artifactId>logosflow-eureka-discovery-service</artifactId>
+                <version>${logosflow-parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.logosflow.modules</groupId>
+                <artifactId>logosflow-gateway</artifactId>
+                <version>${logosflow-parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.logosflow.modules</groupId>
+                <artifactId>logosflow-libs</artifactId>
+                <version>${logosflow-parent.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.logosflow.modules</groupId>
+                <artifactId>spa-demo-endpoint</artifactId>
+                <version>${logosflow-parent.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
     <build>
-        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+        <pluginManagement>
             <plugins>
                 <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <version>${maven-enforcer-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>enforce-maven-parent</id>
+                            <goals>
+                                <goal>enforce</goal>
+                            </goals>
+                            <configuration>
+                                <rules>
+                                    <banDuplicatePomDependencyVersions/>
+                                    <dependencyConvergence/>
+                                </rules>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
-                    <artifactId>maven-clean-plugin</artifactId>
-                    <version>3.2.0</version>
-                </plugin>
-                <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>3.0.2</version>
-                </plugin>
-                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.11.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-surefire-plugin</artifactId>
-                    <version>3.0.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-war-plugin</artifactId>
-                    <version>3.3.2</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-install-plugin</artifactId>
-                    <version>3.1.0</version>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-deploy-plugin</artifactId>
-                    <version>3.1.0</version>
+                    <configuration>
+                        <source>${java.version}</source>
+                        <target>${java.version}</target>
+                        <encoding>${project.build.sourceEncoding}</encoding>
+                        <showWarnings>true</showWarnings>
+                        <showDeprecation>true</showDeprecation>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${maven-enforcer-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-maven-parent</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <banDuplicatePomDependencyVersions/>
+                                <dependencyConvergence/>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
 </project>

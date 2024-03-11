@@ -5,90 +5,28 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.9</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>io.logosflow.modules</groupId>
+        <artifactId>logosflow-spring-boot-core</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../logosflow-spring-boot-core/pom.xml</relativePath>
     </parent>
 
-    <groupId>io.logosflow.modules</groupId>
     <artifactId>demo-rest-controller-app</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>${logosflow-parent.version}</version>
     <packaging>jar</packaging>
 
     <name>demo-rest-controller-app</name>
 
     <description>Demo project for Spring Boot standard REST Controller infrastructure layer</description>
 
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>11</java.version>
-
-        <logosflow-parent.version>1.0.0-SNAPSHOT</logosflow-parent.version>
-        <spring-boot.version>2.7.9</spring-boot.version>
-        <spring-cloud.version>2021.0.6</spring-cloud.version>
-
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
-
-        <testcontainers.version>1.17.6</testcontainers.version>
-    </properties>
-
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>io.logosflow.modules</groupId>
-                <artifactId>logosflow-parent</artifactId>
-                <version>${logosflow-parent.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
             <dependency>
                 <groupId>io.logosflow.modules</groupId>
                 <artifactId>logosflow-eureka-configuration</artifactId>
                 <version>${logosflow-parent.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>io.logosflow.modules</groupId>
-                <artifactId>logosflow-eureka-client-dependencies</artifactId>
-                <version>${logosflow-parent.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <type>pom</type>
-                <version>${spring-boot.version}</version>
-                <scope>import</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.testcontainers</groupId>
-                <artifactId>testcontainers-bom</artifactId>
-                <version>${testcontainers.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <!-- CONFLICTS SOLVING            -->
-
-            <dependency>
-                <groupId>org.osgi</groupId>
-                <artifactId>org.osgi.core</artifactId>
-                <version>4.3.1</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>com.google.code.findbugs</groupId>
-                <artifactId>jsr305</artifactId>
-                <version>3.0.2</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>net.java.dev.jna</groupId>
-                <artifactId>jna</artifactId>
-                <version>5.12.1</version>
-                <scope>test</scope>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -107,47 +45,9 @@
             <artifactId>logosflow-eureka-client-dependencies</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-devtools</artifactId>
-            <scope>runtime</scope>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-configuration-processor</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
-
-            <!-- self conflicts-->
-
-            <!-- <groupId>org.osgi</groupId>-->
-            <!-- <artifactId>org.osgi.cor</artifactId>-->
-
-            <!--  exist in spring-boot-starter-test, is in conflict-->
-            <!-- <groupId>com.google.code.findbugs</groupId>-->
-            <!-- <artifactId>jsr305</artifactId>-->
-
-            <!-- <groupId>net.java.dev.jna</groupId>-->
-            <!-- <artifactId>jna</artifactId>-->
         </dependency>
     </dependencies>
 
@@ -160,37 +60,6 @@
     </pluginRepositories>
 
     <build>
-        <finalName>demo-rest-controller-app</finalName>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>enforce</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <dependencyConvergence/>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
+        <finalName>demo-rest-controller-app-${logosflow-parent.version}</finalName>
     </build>
 </project>
