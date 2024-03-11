@@ -5,7 +5,7 @@ The project for management, interaction and collaboration
 
 To install Java applications (in project directory) run command:
 ```shell
-mvn clean install
+make mvn/rebuild-all
 ```
 
 ## Deployment (Docker)
