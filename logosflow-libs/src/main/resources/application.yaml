@@ -1,9 +1,26 @@
 server:
   port: 0
 
+
+#  Sets the name of the Spring application. This can be useful for identifying 
+#  the application in logs, metrics, eureka, consul, ect.
+
 spring:
   application:
     name: libraries-server
+
+
+  # Eureka client configuration.
+  
+  # instance:
+  #   instance-id: Generate a unique instance ID using the app name and a random value.
+  
+  # serviceUrl:
+  #   defaultZone: Eureka server URL, constructed from config properties.
+  
+  # Custom properties:
+  #   serviceHost: Eureka server host. Default is localhost.
+  #   servicePort: Eureka server port. Default is 8761.
 
 eureka:
   instance:
