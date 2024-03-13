@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="us-ascii" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css"
+     height="900px" preserveAspectRatio="none" style="width:2398px;height:900px;background:#FFFFFF;" version="1.1"
+     viewBox="0 0 2398 900" width="2398px" zoomAndPan="magnify">
+    <defs/>
+    <g><!--class OidcPkceUtils-->
+        <g id="elem_OidcPkceUtils">
+            <rect codeLine="1" fill="#F1F1F1" height="145.7813" id="OidcPkceUtils" rx="2.5" ry="2.5"
+                  style="stroke:#181818;stroke-width:0.5;" width="194" x="1002.5" y="7"/>
+            <ellipse cx="1047.75" cy="23" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/>
+            <path d="M1050.7188,28.6406 Q1050.1406,28.9375 1049.5,29.0781 Q1048.8594,29.2344 1048.1563,29.2344 Q1045.6563,29.2344 1044.3281,27.5938 Q1043.0156,25.9375 1043.0156,22.8125 Q1043.0156,19.6875 1044.3281,18.0313 Q1045.6563,16.375 1048.1563,16.375 Q1048.8594,16.375 1049.5,16.5313 Q1050.1563,16.6875 1050.7188,16.9844 L1050.7188,19.7031 Q1050.0938,19.125 1049.5,18.8594 Q1048.9063,18.5781 1048.2813,18.5781 Q1046.9375,18.5781 1046.25,19.6563 Q1045.5625,20.7188 1045.5625,22.8125 Q1045.5625,24.9063 1046.25,25.9844 Q1046.9375,27.0469 1048.2813,27.0469 Q1048.9063,27.0469 1049.5,26.7813 Q1050.0938,26.5 1050.7188,25.9219 L1050.7188,28.6406 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="95"
+                  x="1068.25" y="27.8467">OidcPkceUtils
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="1003.5" x2="1195.5" y1="39" y2="39"/>
+            <ellipse cx="1013.5" cy="52.6484" fill="none" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="168"
+                  x="1022.5" y="55.9951">oidcClientConfiguration
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="1003.5" x2="1195.5" y1="63.2969" y2="63.2969"/>
+            <ellipse cx="1013.5" cy="76.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="96"
+                  x="1022.5" y="80.292">oAuth2login()
+            </text>
+            <ellipse cx="1013.5" cy="93.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="106"
+                  x="1022.5" y="96.5889">oAuth2logout()
+            </text>
+            <ellipse cx="1013.5" cy="109.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="86"
+                  x="1022.5" y="112.8857">forceLogin()
+            </text>
+            <ellipse cx="1013.5" cy="125.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="148"
+                  x="1022.5" y="129.1826">onOauth2Authorize()
+            </text>
+            <ellipse cx="1013.5" cy="142.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126"
+                  x="1022.5" y="145.4795">getAccessToken()
+            </text>
+        </g><!--class Oauth2LoginLogoutManager-->
+        <g id="elem_Oauth2LoginLogoutManager">
+            <rect codeLine="10" fill="#F1F1F1" height="113.1875" id="Oauth2LoginLogoutManager" rx="2.5" ry="2.5"
+                  style="stroke:#181818;stroke-width:0.5;" width="235" x="982" y="213"/>
+            <ellipse cx="997" cy="229" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/>
+            <path d="M999.9688,234.6406 Q999.3906,234.9375 998.75,235.0781 Q998.1094,235.2344 997.4063,235.2344 Q994.9063,235.2344 993.5781,233.5938 Q992.2656,231.9375 992.2656,228.8125 Q992.2656,225.6875 993.5781,224.0313 Q994.9063,222.375 997.4063,222.375 Q998.1094,222.375 998.75,222.5313 Q999.4063,222.6875 999.9688,222.9844 L999.9688,225.7031 Q999.3438,225.125 998.75,224.8594 Q998.1563,224.5781 997.5313,224.5781 Q996.1875,224.5781 995.5,225.6563 Q994.8125,226.7188 994.8125,228.8125 Q994.8125,230.9063 995.5,231.9844 Q996.1875,233.0469 997.5313,233.0469 Q998.1563,233.0469 998.75,232.7813 Q999.3438,232.5 999.9688,231.9219 L999.9688,234.6406 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="203"
+                  x="1011" y="233.8467">Oauth2LoginLogoutManager
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="983" x2="1216" y1="245" y2="245"/>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="983" x2="1216" y1="253" y2="253"/>
+            <rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="990" y="263.6484"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="45" x="1002"
+                  y="269.9951">login()
+            </text>
+            <rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="990" y="279.9453"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="135"
+                  x="1002" y="286.292">forceLogin(scopes)
+            </text>
+            <rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="990" y="296.2422"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="55" x="1002"
+                  y="302.5889">logout()
+            </text>
+            <rect fill="#F24D5C" height="6" style="stroke:#C82930;stroke-width:1.0;" width="6" x="990" y="312.5391"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="153"
+                  x="1002" y="318.8857">listenRemoteLogout()
+            </text>
+        </g><!--class AuthorizationUriBuilder-->
+        <g id="elem_AuthorizationUriBuilder">
+            <rect codeLine="17" fill="#F1F1F1" height="64.2969" id="AuthorizationUriBuilder" rx="2.5" ry="2.5"
+                  style="stroke:#181818;stroke-width:0.5;" width="373" x="7" y="418.5"/>
+            <ellipse cx="106.25" cy="434.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/>
+            <path d="M109.2188,440.1406 Q108.6406,440.4375 108,440.5781 Q107.3594,440.7344 106.6563,440.7344 Q104.1563,440.7344 102.8281,439.0938 Q101.5156,437.4375 101.5156,434.3125 Q101.5156,431.1875 102.8281,429.5313 Q104.1563,427.875 106.6563,427.875 Q107.3594,427.875 108,428.0313 Q108.6563,428.1875 109.2188,428.4844 L109.2188,431.2031 Q108.5938,430.625 108,430.3594 Q107.4063,430.0781 106.7813,430.0781 Q105.4375,430.0781 104.75,431.1563 Q104.0625,432.2188 104.0625,434.3125 Q104.0625,436.4063 104.75,437.4844 Q105.4375,438.5469 106.7813,438.5469 Q107.4063,438.5469 108,438.2813 Q108.5938,438 109.2188,437.4219 L109.2188,440.1406 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="166"
+                  x="126.75" y="439.3467">AuthorizationUriBuilder
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="379" y1="450.5" y2="450.5"/>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="8" x2="379" y1="458.5" y2="458.5"/>
+            <ellipse cx="18" cy="472.1484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="347" x="27"
+                  y="475.4951">buildUriFor(config, state, codeChallenge, scopes)
+            </text>
+        </g><!--class PageStateStorage-->
+        <g id="elem_PageStateStorage">
+            <rect codeLine="21" fill="#F1F1F1" height="96.8906" id="PageStateStorage" rx="2.5" ry="2.5"
+                  style="stroke:#181818;stroke-width:0.5;" width="196" x="415.5" y="402"/>
+            <ellipse cx="446.7" cy="418" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/>
+            <path d="M449.6688,423.6406 Q449.0906,423.9375 448.45,424.0781 Q447.8094,424.2344 447.1063,424.2344 Q444.6063,424.2344 443.2781,422.5938 Q441.9656,420.9375 441.9656,417.8125 Q441.9656,414.6875 443.2781,413.0313 Q444.6063,411.375 447.1063,411.375 Q447.8094,411.375 448.45,411.5313 Q449.1063,411.6875 449.6688,411.9844 L449.6688,414.7031 Q449.0438,414.125 448.45,413.8594 Q447.8563,413.5781 447.2313,413.5781 Q445.8875,413.5781 445.2,414.6563 Q444.5125,415.7188 444.5125,417.8125 Q444.5125,419.9063 445.2,420.9844 Q445.8875,422.0469 447.2313,422.0469 Q447.8563,422.0469 448.45,421.7813 Q449.0438,421.5 449.6688,420.9219 L449.6688,423.6406 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="128"
+                  x="464.3" y="422.8467">PageStateStorage
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="416.5" x2="610.5" y1="434" y2="434"/>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="416.5" x2="610.5" y1="442" y2="442"/>
+            <ellipse cx="426.5" cy="455.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="170"
+                  x="435.5" y="458.9951">storeOauth2State(state)
+            </text>
+            <ellipse cx="426.5" cy="471.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="155"
+                  x="435.5" y="475.292">retrieveOauth2State()
+            </text>
+            <ellipse cx="426.5" cy="488.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46"
+                  x="435.5" y="491.5889">clear()
+            </text>
+        </g><!--class PageStateGenerator-->
+        <g id="elem_PageStateGenerator">
+            <rect codeLine="27" fill="#F1F1F1" height="80.5938" id="PageStateGenerator" rx="2.5" ry="2.5"
+                  style="stroke:#181818;stroke-width:0.5;" width="248" x="646.5" y="410"/>
+            <ellipse cx="693.75" cy="426" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/>
+            <path d="M696.7188,431.6406 Q696.1406,431.9375 695.5,432.0781 Q694.8594,432.2344 694.1563,432.2344 Q691.6563,432.2344 690.3281,430.5938 Q689.0156,428.9375 689.0156,425.8125 Q689.0156,422.6875 690.3281,421.0313 Q691.6563,419.375 694.1563,419.375 Q694.8594,419.375 695.5,419.5313 Q696.1563,419.6875 696.7188,419.9844 L696.7188,422.7031 Q696.0938,422.125 695.5,421.8594 Q694.9063,421.5781 694.2813,421.5781 Q692.9375,421.5781 692.25,422.6563 Q691.5625,423.7188 691.5625,425.8125 Q691.5625,427.9063 692.25,428.9844 Q692.9375,430.0469 694.2813,430.0469 Q694.9063,430.0469 695.5,429.7813 Q696.0938,429.5 696.7188,428.9219 L696.7188,431.6406 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145"
+                  x="714.25" y="430.8467">PageStateGenerator
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="647.5" x2="893.5" y1="442" y2="442"/>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="647.5" x2="893.5" y1="450" y2="450"/>
+            <ellipse cx="657.5" cy="463.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="112"
+                  x="666.5" y="466.9951">generateState()
+            </text>
+            <ellipse cx="657.5" cy="479.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="222"
+                  x="666.5" y="483.292">generateRandomString(length)
+            </text>
+        </g><!--class PkceCodeChallengeVerifierGenerator-->
+        <g id="elem_PkceCodeChallengeVerifierGenerator">
+            <rect codeLine="32" fill="#F1F1F1" height="80.5938" id="PkceCodeChallengeVerifierGenerator" rx="2.5"
+                  ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="339" x="930" y="410"/>
+            <ellipse cx="962.55" cy="426" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/>
+            <path d="M965.5188,431.6406 Q964.9406,431.9375 964.3,432.0781 Q963.6594,432.2344 962.9563,432.2344 Q960.4563,432.2344 959.1281,430.5938 Q957.8156,428.9375 957.8156,425.8125 Q957.8156,422.6875 959.1281,421.0313 Q960.4563,419.375 962.9563,419.375 Q963.6594,419.375 964.3,419.5313 Q964.9563,419.6875 965.5188,419.9844 L965.5188,422.7031 Q964.8938,422.125 964.3,421.8594 Q963.7063,421.5781 963.0813,421.5781 Q961.7375,421.5781 961.05,422.6563 Q960.3625,423.7188 960.3625,425.8125 Q960.3625,427.9063 961.05,428.9844 Q961.7375,430.0469 963.0813,430.0469 Q963.7063,430.0469 964.3,429.7813 Q964.8938,429.5 965.5188,428.9219 L965.5188,431.6406 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="268"
+                  x="980.45" y="430.8467">PkceCodeChallengeVerifierGenerator
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="931" x2="1268" y1="442" y2="442"/>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="931" x2="1268" y1="450" y2="450"/>
+            <ellipse cx="941" cy="463.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="165" x="950"
+                  y="466.9951">generateCodeVerifier()
+            </text>
+            <ellipse cx="941" cy="479.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="313" x="950"
+                  y="483.292">generateCodeChallengeValue(codeVerifier)
+            </text>
+        </g><!--class PkceCodeChallengeVerifierStorage-->
+        <g id="elem_PkceCodeChallengeVerifierStorage">
+            <rect codeLine="37" fill="#F1F1F1" height="129.4844" id="PkceCodeChallengeVerifierStorage" rx="2.5" ry="2.5"
+                  style="stroke:#181818;stroke-width:0.5;" width="373" x="1304" y="386"/>
+            <ellipse cx="1360.75" cy="402" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/>
+            <path d="M1363.7188,407.6406 Q1363.1406,407.9375 1362.5,408.0781 Q1361.8594,408.2344 1361.1563,408.2344 Q1358.6563,408.2344 1357.3281,406.5938 Q1356.0156,404.9375 1356.0156,401.8125 Q1356.0156,398.6875 1357.3281,397.0313 Q1358.6563,395.375 1361.1563,395.375 Q1361.8594,395.375 1362.5,395.5313 Q1363.1563,395.6875 1363.7188,395.9844 L1363.7188,398.7031 Q1363.0938,398.125 1362.5,397.8594 Q1361.9063,397.5781 1361.2813,397.5781 Q1359.9375,397.5781 1359.25,398.6563 Q1358.5625,399.7188 1358.5625,401.8125 Q1358.5625,403.9063 1359.25,404.9844 Q1359.9375,406.0469 1361.2813,406.0469 Q1361.9063,406.0469 1362.5,405.7813 Q1363.0938,405.5 1363.7188,404.9219 L1363.7188,407.6406 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="251"
+                  x="1381.25" y="406.8467">PkceCodeChallengeVerifierStorage
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="1305" x2="1676" y1="418" y2="418"/>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="1305" x2="1676" y1="426" y2="426"/>
+            <ellipse cx="1315" cy="439.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="347"
+                  x="1324" y="442.9951">storeOauth2PkceCodeChallenge(codeChallenge)
+            </text>
+            <ellipse cx="1315" cy="455.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="257"
+                  x="1324" y="459.292">storePkceCodeVerifier(codeVerifier)
+            </text>
+            <ellipse cx="1315" cy="472.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="189"
+                  x="1324" y="475.5889">retrievePkceCodeVerifier()
+            </text>
+            <ellipse cx="1315" cy="488.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="208"
+                  x="1324" y="491.8857">retrievePkceCodeChallenge()
+            </text>
+            <ellipse cx="1315" cy="504.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="73" x="1324"
+                  y="508.1826">clearPair()
+            </text>
+        </g><!--class RedirectUserToAuthorization-->
+        <g id="elem_RedirectUserToAuthorization">
+            <rect codeLine="45" fill="#F1F1F1" height="64.2969" id="RedirectUserToAuthorization" rx="2.5" ry="2.5"
+                  style="stroke:#181818;stroke-width:0.5;" width="244" x="1712.5" y="418.5"/>
+            <ellipse cx="1730.65" cy="434.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/>
+            <path d="M1733.6188,440.1406 Q1733.0406,440.4375 1732.4,440.5781 Q1731.7594,440.7344 1731.0563,440.7344 Q1728.5563,440.7344 1727.2281,439.0938 Q1725.9156,437.4375 1725.9156,434.3125 Q1725.9156,431.1875 1727.2281,429.5313 Q1728.5563,427.875 1731.0563,427.875 Q1731.7594,427.875 1732.4,428.0313 Q1733.0563,428.1875 1733.6188,428.4844 L1733.6188,431.2031 Q1732.9938,430.625 1732.4,430.3594 Q1731.8063,430.0781 1731.1813,430.0781 Q1729.8375,430.0781 1729.15,431.1563 Q1728.4625,432.2188 1728.4625,434.3125 Q1728.4625,436.4063 1729.15,437.4844 Q1729.8375,438.5469 1731.1813,438.5469 Q1731.8063,438.5469 1732.4,438.2813 Q1732.9938,438 1733.6188,437.4219 L1733.6188,440.1406 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="205"
+                  x="1745.35" y="439.3467">RedirectUserToAuthorization
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="1713.5" x2="1955.5" y1="450.5" y2="450.5"/>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="1713.5" x2="1955.5" y1="458.5" y2="458.5"/>
+            <ellipse cx="1723.5" cy="472.1484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="218"
+                  x="1732.5" y="475.4951">redirectToUrl(authorizationUrl)
+            </text>
+        </g><!--class OnOAuth2AuthorizedHandler-->
+        <g id="elem_OnOAuth2AuthorizedHandler">
+            <rect codeLine="49" fill="#F1F1F1" height="64.2969" id="OnOAuth2AuthorizedHandler" rx="2.5" ry="2.5"
+                  style="stroke:#181818;stroke-width:0.5;" width="239" x="1992" y="418.5"/>
+            <ellipse cx="2007" cy="434.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/>
+            <path d="M2009.9688,440.1406 Q2009.3906,440.4375 2008.75,440.5781 Q2008.1094,440.7344 2007.4063,440.7344 Q2004.9063,440.7344 2003.5781,439.0938 Q2002.2656,437.4375 2002.2656,434.3125 Q2002.2656,431.1875 2003.5781,429.5313 Q2004.9063,427.875 2007.4063,427.875 Q2008.1094,427.875 2008.75,428.0313 Q2009.4063,428.1875 2009.9688,428.4844 L2009.9688,431.2031 Q2009.3438,430.625 2008.75,430.3594 Q2008.1563,430.0781 2007.5313,430.0781 Q2006.1875,430.0781 2005.5,431.1563 Q2004.8125,432.2188 2004.8125,434.3125 Q2004.8125,436.4063 2005.5,437.4844 Q2006.1875,438.5469 2007.5313,438.5469 Q2008.1563,438.5469 2008.75,438.2813 Q2009.3438,438 2009.9688,437.4219 L2009.9688,440.1406 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="207"
+                  x="2021" y="439.3467">OnOAuth2AuthorizedHandler
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="1993" x2="2230" y1="450.5" y2="450.5"/>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="1993" x2="2230" y1="458.5" y2="458.5"/>
+            <ellipse cx="2003" cy="472.1484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="171"
+                  x="2012" y="475.4951">handle(state, authCode)
+            </text>
+        </g><!--class OidcTokenExchanger-->
+        <g id="elem_OidcTokenExchanger">
+            <rect codeLine="53" fill="#F1F1F1" height="80.5938" id="OidcTokenExchanger" rx="2.5" ry="2.5"
+                  style="stroke:#181818;stroke-width:0.5;" width="341" x="1779" y="615.5"/>
+            <ellipse cx="1869.25" cy="631.5" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/>
+            <path d="M1872.2188,637.1406 Q1871.6406,637.4375 1871,637.5781 Q1870.3594,637.7344 1869.6563,637.7344 Q1867.1563,637.7344 1865.8281,636.0938 Q1864.5156,634.4375 1864.5156,631.3125 Q1864.5156,628.1875 1865.8281,626.5313 Q1867.1563,624.875 1869.6563,624.875 Q1870.3594,624.875 1871,625.0313 Q1871.6563,625.1875 1872.2188,625.4844 L1872.2188,628.2031 Q1871.5938,627.625 1871,627.3594 Q1870.4063,627.0781 1869.7813,627.0781 Q1868.4375,627.0781 1867.75,628.1563 Q1867.0625,629.2188 1867.0625,631.3125 Q1867.0625,633.4063 1867.75,634.4844 Q1868.4375,635.5469 1869.7813,635.5469 Q1870.4063,635.5469 1871,635.2813 Q1871.5938,635 1872.2188,634.4219 L1872.2188,637.1406 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="152"
+                  x="1889.75" y="636.3467">OidcTokenExchanger
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="1780" x2="2119" y1="647.5" y2="647.5"/>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="1780" x2="2119" y1="655.5" y2="655.5"/>
+            <ellipse cx="1790" cy="669.1484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="289"
+                  x="1799" y="672.4951">exchangeCodeOnOidcTokens(authCode)
+            </text>
+            <ellipse cx="1790" cy="685.4453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="315"
+                  x="1799" y="688.792">requestRefreshedOidcTokens(refreshToken)
+            </text>
+        </g><!--class OidcTokensStorage-->
+        <g id="elem_OidcTokensStorage">
+            <rect codeLine="58" fill="#F1F1F1" height="162.0781" id="OidcTokensStorage" rx="2.5" ry="2.5"
+                  style="stroke:#181818;stroke-width:0.5;" width="236" x="2155.5" y="575"/>
+            <ellipse cx="2199.75" cy="591" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/>
+            <path d="M2202.7188,596.6406 Q2202.1406,596.9375 2201.5,597.0781 Q2200.8594,597.2344 2200.1563,597.2344 Q2197.6563,597.2344 2196.3281,595.5938 Q2195.0156,593.9375 2195.0156,590.8125 Q2195.0156,587.6875 2196.3281,586.0313 Q2197.6563,584.375 2200.1563,584.375 Q2200.8594,584.375 2201.5,584.5313 Q2202.1563,584.6875 2202.7188,584.9844 L2202.7188,587.7031 Q2202.0938,587.125 2201.5,586.8594 Q2200.9063,586.5781 2200.2813,586.5781 Q2198.9375,586.5781 2198.25,587.6563 Q2197.5625,588.7188 2197.5625,590.8125 Q2197.5625,592.9063 2198.25,593.9844 Q2198.9375,595.0469 2200.2813,595.0469 Q2200.9063,595.0469 2201.5,594.7813 Q2202.0938,594.5 2202.7188,593.9219 L2202.7188,596.6406 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="139"
+                  x="2220.25" y="595.8467">OidcTokensStorage
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="2156.5" x2="2390.5" y1="607" y2="607"/>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="2156.5" x2="2390.5" y1="615" y2="615"/>
+            <ellipse cx="2166.5" cy="628.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="210"
+                  x="2175.5" y="631.9951">storeOidcTokens(oidcTokens)
+            </text>
+            <ellipse cx="2166.5" cy="644.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="126"
+                  x="2175.5" y="648.292">getAccessToken()
+            </text>
+            <ellipse cx="2166.5" cy="661.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="132"
+                  x="2175.5" y="664.5889">getRefreshToken()
+            </text>
+            <ellipse cx="2166.5" cy="677.5391" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="90"
+                  x="2175.5" y="680.8857">getIdToken()
+            </text>
+            <ellipse cx="2166.5" cy="693.8359" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="84"
+                  x="2175.5" y="697.1826">getScopes()
+            </text>
+            <ellipse cx="2166.5" cy="710.1328" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="124"
+                  x="2175.5" y="713.4795">getSessionState()
+            </text>
+            <ellipse cx="2166.5" cy="726.4297" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="46"
+                  x="2175.5" y="729.7764">clear()
+            </text>
+        </g><!--class TokenParser-->
+        <g id="elem_TokenParser">
+            <rect codeLine="68" fill="#F1F1F1" height="96.8906" id="TokenParser" rx="2.5" ry="2.5"
+                  style="stroke:#181818;stroke-width:0.5;" width="408" x="1745.5" y="797"/>
+            <ellipse cx="1900.75" cy="813" fill="#ADD1B2" rx="11" ry="11" style="stroke:#181818;stroke-width:1.0;"/>
+            <path d="M1903.7188,818.6406 Q1903.1406,818.9375 1902.5,819.0781 Q1901.8594,819.2344 1901.1563,819.2344 Q1898.6563,819.2344 1897.3281,817.5938 Q1896.0156,815.9375 1896.0156,812.8125 Q1896.0156,809.6875 1897.3281,808.0313 Q1898.6563,806.375 1901.1563,806.375 Q1901.8594,806.375 1902.5,806.5313 Q1903.1563,806.6875 1903.7188,806.9844 L1903.7188,809.7031 Q1903.0938,809.125 1902.5,808.8594 Q1901.9063,808.5781 1901.2813,808.5781 Q1899.9375,808.5781 1899.25,809.6563 Q1898.5625,810.7188 1898.5625,812.8125 Q1898.5625,814.9063 1899.25,815.9844 Q1899.9375,817.0469 1901.2813,817.0469 Q1901.9063,817.0469 1902.5,816.7813 Q1903.0938,816.5 1903.7188,815.9219 L1903.7188,818.6406 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="89"
+                  x="1921.25" y="817.8467">TokenParser
+            </text>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="1746.5" x2="2152.5" y1="829" y2="829"/>
+            <line style="stroke:#181818;stroke-width:0.5;" x1="1746.5" x2="2152.5" y1="837" y2="837"/>
+            <ellipse cx="1756.5" cy="850.6484" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="375"
+                  x="1765.5" y="853.9951">parseJwtToJsonPayloadAsString(jwtTokenAsJwtString)
+            </text>
+            <ellipse cx="1756.5" cy="866.9453" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="382"
+                  x="1765.5" y="870.292">parseJwtPayloadStringToObject(jwtPayloadPartAsJson)
+            </text>
+            <ellipse cx="1756.5" cy="883.2422" fill="#84BE84" rx="3" ry="3" style="stroke:#038048;stroke-width:1.0;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="307"
+                  x="1765.5" y="886.5889">getExpirationTimeUtc(jwtTokenAsJwtString)
+            </text>
+        </g><!--link OidcPkceUtils to Oauth2LoginLogoutManager-->
+        <g id="link_OidcPkceUtils_Oauth2LoginLogoutManager">
+            <path codeLine="74" d="M1099.5,153.22 C1099.5,173.03 1099.5,188.19 1099.5,206.91 " fill="none"
+                  id="OidcPkceUtils-to-Oauth2LoginLogoutManager" style="stroke:#181818;stroke-width:1.0;"/>
+            <polygon fill="#181818" points="1099.5,212.91,1103.5,203.91,1099.5,207.91,1095.5,203.91,1099.5,212.91"
+                     style="stroke:#181818;stroke-width:1.0;"/>
+        </g><!--link Oauth2LoginLogoutManager to AuthorizationUriBuilder-->
+        <g id="link_Oauth2LoginLogoutManager_AuthorizationUriBuilder">
+            <path codeLine="75"
+                  d="M981.76,284.79 C841.5,302.99 600.63,337.92 397.5,386 C359.78,394.93 324.5713,405.3111 289.3513,416.6511 "
+                  fill="none" id="Oauth2LoginLogoutManager-to-AuthorizationUriBuilder"
+                  style="stroke:#181818;stroke-width:1.0;"/>
+            <polygon fill="#181818"
+                     points="283.64,418.49,293.4328,419.5392,288.3994,416.9576,290.981,411.9242,283.64,418.49"
+                     style="stroke:#181818;stroke-width:1.0;"/>
+        </g><!--link Oauth2LoginLogoutManager to PageStateStorage-->
+        <g id="link_Oauth2LoginLogoutManager_PageStateStorage">
+            <path codeLine="76"
+                  d="M981.7,290.42 C884.79,308.92 744.95,340.5 628.5,386 C616.82,390.57 610.2017,393.3872 598.6017,399.2672 "
+                  fill="none" id="Oauth2LoginLogoutManager-to-PageStateStorage"
+                  style="stroke:#181818;stroke-width:1.0;"/>
+            <polygon fill="#181818"
+                     points="593.25,401.98,603.0861,401.4787,597.7098,399.7194,599.4691,394.343,593.25,401.98"
+                     style="stroke:#181818;stroke-width:1.0;"/>
+        </g><!--link Oauth2LoginLogoutManager to PageStateGenerator-->
+        <g id="link_Oauth2LoginLogoutManager_PageStateGenerator">
+            <path codeLine="77" d="M997.21,326.16 C947.31,353.3 893.7406,382.4528 848.5006,407.0628 " fill="none"
+                  id="Oauth2LoginLogoutManager-to-PageStateGenerator" style="stroke:#181818;stroke-width:1.0;"/>
+            <polygon fill="#181818"
+                     points="843.23,409.93,853.0474,409.143,847.6222,407.5407,849.2245,402.1155,843.23,409.93"
+                     style="stroke:#181818;stroke-width:1.0;"/>
+        </g><!--link Oauth2LoginLogoutManager to PkceCodeChallengeVerifierGenerator-->
+        <g id="link_Oauth2LoginLogoutManager_PkceCodeChallengeVerifierGenerator">
+            <path codeLine="78" d="M1099.5,326.16 C1099.5,353.25 1099.5,379.2 1099.5,403.79 " fill="none"
+                  id="Oauth2LoginLogoutManager-to-PkceCodeChallengeVerifierGenerator"
+                  style="stroke:#181818;stroke-width:1.0;"/>
+            <polygon fill="#181818" points="1099.5,409.79,1103.5,400.79,1099.5,404.79,1095.5,400.79,1099.5,409.79"
+                     style="stroke:#181818;stroke-width:1.0;"/>
+        </g><!--link Oauth2LoginLogoutManager to PkceCodeChallengeVerifierStorage-->
+        <g id="link_Oauth2LoginLogoutManager_PkceCodeChallengeVerifierStorage">
+            <path codeLine="79" d="M1217.08,324.33 C1259.47,343.74 1302.2547,363.3222 1346.2847,383.4822 " fill="none"
+                  id="Oauth2LoginLogoutManager-to-PkceCodeChallengeVerifierStorage"
+                  style="stroke:#181818;stroke-width:1.0;"/>
+            <polygon fill="#181818"
+                     points="1351.74,385.98,1345.2222,378.5963,1347.1939,383.8985,1341.8918,385.8701,1351.74,385.98"
+                     style="stroke:#181818;stroke-width:1.0;"/>
+        </g><!--link Oauth2LoginLogoutManager to RedirectUserToAuthorization-->
+        <g id="link_Oauth2LoginLogoutManager_RedirectUserToAuthorization">
+            <path codeLine="80"
+                  d="M1217.25,285.06 C1338.77,302.01 1532.85,334.44 1694.5,386 C1721.45,394.6 1744.6701,404.3861 1768.9701,415.9261 "
+                  fill="none" id="Oauth2LoginLogoutManager-to-RedirectUserToAuthorization"
+                  style="stroke:#181818;stroke-width:1.0;"/>
+            <polygon fill="#181818"
+                     points="1774.39,418.5,1767.9761,411.0259,1769.8734,416.3551,1764.5443,418.2524,1774.39,418.5"
+                     style="stroke:#181818;stroke-width:1.0;"/>
+        </g><!--link Oauth2LoginLogoutManager to OnOAuth2AuthorizedHandler-->
+        <g id="link_Oauth2LoginLogoutManager_OnOAuth2AuthorizedHandler">
+            <path codeLine="81"
+                  d="M1217.35,274.9 C1387.41,283.74 1710.12,309.89 1973.5,386 C2000.99,393.94 2024.5832,403.9177 2048.8432,415.8177 "
+                  fill="none" id="Oauth2LoginLogoutManager-to-OnOAuth2AuthorizedHandler"
+                  style="stroke:#181818;stroke-width:1.0;"/>
+            <polygon fill="#181818"
+                     points="2054.23,418.46,2047.9113,410.9053,2049.741,416.258,2044.3882,418.0877,2054.23,418.46"
+                     style="stroke:#181818;stroke-width:1.0;"/>
+        </g><!--link OnOAuth2AuthorizedHandler to OidcTokenExchanger-->
+        <g id="link_OnOAuth2AuthorizedHandler_OidcTokenExchanger">
+            <path codeLine="82" d="M2086.54,482.85 C2058.23,518.42 2015.7368,571.7957 1984.9068,610.5257 " fill="none"
+                  id="OnOAuth2AuthorizedHandler-to-OidcTokenExchanger" style="stroke:#181818;stroke-width:1.0;"/>
+            <polygon fill="#181818"
+                     points="1981.17,615.22,1989.9047,610.6697,1984.284,611.3081,1983.6456,605.6874,1981.17,615.22"
+                     style="stroke:#181818;stroke-width:1.0;"/>
+        </g><!--link OnOAuth2AuthorizedHandler to OidcTokensStorage-->
+        <g id="link_OnOAuth2AuthorizedHandler_OidcTokensStorage">
+            <path codeLine="83" d="M2136.46,482.85 C2155.98,507.38 2180.2932,537.9157 2205.9332,570.1257 " fill="none"
+                  id="OnOAuth2AuthorizedHandler-to-OidcTokensStorage" style="stroke:#181818;stroke-width:1.0;"/>
+            <polygon fill="#181818"
+                     points="2209.67,574.82,2207.1944,565.2874,2206.556,570.9081,2200.9353,570.2697,2209.67,574.82"
+                     style="stroke:#181818;stroke-width:1.0;"/>
+        </g><!--link OidcTokenExchanger to TokenParser-->
+        <g id="link_OidcTokenExchanger_TokenParser">
+            <path codeLine="84" d="M1949.5,696.76 C1949.5,726 1949.5,759.87 1949.5,790.82 " fill="none"
+                  id="OidcTokenExchanger-to-TokenParser" style="stroke:#181818;stroke-width:1.0;"/>
+            <polygon fill="#181818" points="1949.5,796.82,1953.5,787.82,1949.5,791.82,1945.5,787.82,1949.5,796.82"
+                     style="stroke:#181818;stroke-width:1.0;"/>
+        </g><!--SRC=[dLHDaziW3BtdL_ZeJ3QN_e3Ek9djnquwoJXExonM77O9f83RRJlzxnLWRDZOsKnlI7fFJo0aoedMsORLTFjCOMyOrzcVMPOj9BfMd84mAoaEh6aLCKmA5ofQStp7PSD4FaySiZNUSv2AmZf2Y0sn60kKYlq6xsx059I2rfLy1WlzEvjHNv63kmnhb_Sh4QG1vOfR3jhBI4bJUGOzxm2XbYLdse0euIGDh8E_5meLkTlj5VlGCbvtEej7Qw3perGvTSzmbsb33DnbLDQmEXBEGJHe1kq-xnQhtLdepaY5PvzGem7-RYwOkspkBHGOnU174dK1oe6eV2pr9n20RP5TjOqt8U86Lqb4BKyxL11DRaisnpWXjduLt-SRA7PWe2O4B3P0Kfqq2-4jv3G2tw8vzLuNX3nfmRo71s1VOLf1zDGNoD7e83YqOqjOqf8IQgQ0chq6LSdaJ_cBg0vGoRtYEKa_7Oy_ljWKoQJKdx5tFFp8epFoxXFQFBR4c8zpwwRf_eKYE8pC0ZhJmb4Ze7G-v71bVcz1cn8E2lGHwWYdlCzPOtfwf743M_R7yS7tlZBIw9rVwjJUkL4RJCo2htXjO1n_IvGEZt6svuUVs8q7BJ7oYqjI5xgRZoSRG4QX4U9zyvZLuNsaafl79soiPNK1L3B8nSoXnlkNC_Fxis8dtB9qN0CBJZVnSlb-SXFE9bUaPKsijUkarplhHdI_9Tx0lxbb_fD_KxLN9lGwSN8WPzEZwdWNWtWhGVSNkfnb2uo-ypy0]-->
+    </g>
+</svg>

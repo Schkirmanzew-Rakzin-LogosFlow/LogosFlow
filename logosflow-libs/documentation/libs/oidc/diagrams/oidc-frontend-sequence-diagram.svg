@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="us-ascii" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css"
+     height="793px" preserveAspectRatio="none" style="width:2994px;height:793px;background:#FFFFFF;" version="1.1"
+     viewBox="0 0 2994 793" width="2994px" zoomAndPan="magnify">
+    <defs/>
+    <g>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="24" x2="24" y1="81.2969"
+              y2="713.0859"/>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="177" x2="177" y1="81.2969"
+              y2="713.0859"/>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="408" x2="408" y1="81.2969"
+              y2="713.0859"/>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="581" x2="581" y1="81.2969"
+              y2="713.0859"/>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="924.5" x2="924.5" y1="81.2969"
+              y2="713.0859"/>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="1095.5" x2="1095.5" y1="81.2969"
+              y2="713.0859"/>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="1276" x2="1276" y1="81.2969"
+              y2="713.0859"/>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="1507" x2="1507" y1="81.2969"
+              y2="713.0859"/>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="1845.5" x2="1845.5" y1="81.2969"
+              y2="713.0859"/>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="2097.5" x2="2097.5" y1="81.2969"
+              y2="713.0859"/>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="2327.5" x2="2327.5" y1="81.2969"
+              y2="713.0859"/>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="2614" x2="2614" y1="81.2969"
+              y2="713.0859"/>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="2830.5" x2="2830.5" y1="81.2969"
+              y2="713.0859"/>
+        <line style="stroke:#181818;stroke-width:0.5;stroke-dasharray:5.0,5.0;" x1="2952.5" x2="2952.5" y1="81.2969"
+              y2="713.0859"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="5"
+              y="77.9951">User
+        </text>
+        <ellipse cx="24" cy="13.5" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/>
+        <path d="M24,21.5 L24,48.5 M11,29.5 L37,29.5 M24,48.5 L11,63.5 M24,48.5 L37,63.5 " fill="none"
+              style="stroke:#181818;stroke-width:0.5;"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="32" x="5"
+              y="725.0811">User
+        </text>
+        <ellipse cx="24" cy="736.8828" fill="#E2E2F0" rx="8" ry="8" style="stroke:#181818;stroke-width:0.5;"/>
+        <path d="M24,744.8828 L24,771.8828 M11,752.8828 L37,752.8828 M24,771.8828 L11,786.8828 M24,771.8828 L37,786.8828 "
+              fill="none" style="stroke:#181818;stroke-width:0.5;"/>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="249"
+              x="53" y="50"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="235" x="60"
+              y="69.9951">index.html/authcodeReader.html
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="249"
+              x="53" y="712.0859"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="235" x="60"
+              y="732.0811">index.html/authcodeReader.html
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="109"
+              x="354" y="50"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="95" x="361"
+              y="69.9951">OidcPkceUtils
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="109"
+              x="354" y="712.0859"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="95" x="361"
+              y="732.0811">OidcPkceUtils
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="217"
+              x="473" y="50"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="203" x="480"
+              y="69.9951">Oauth2LoginLogoutManager
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="217"
+              x="473" y="712.0859"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="203" x="480"
+              y="732.0811">Oauth2LoginLogoutManager
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="180"
+              x="834.5" y="50"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="166" x="841.5"
+              y="69.9951">AuthorizationUriBuilder
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="180"
+              x="834.5" y="712.0859"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="166" x="841.5"
+              y="732.0811">AuthorizationUriBuilder
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="142"
+              x="1024.5" y="50"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="128" x="1031.5"
+              y="69.9951">PageStateStorage
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="142"
+              x="1024.5" y="712.0859"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="128" x="1031.5"
+              y="732.0811">PageStateStorage
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="159"
+              x="1197" y="50"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="1204"
+              y="69.9951">PageStateGenerator
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="159"
+              x="1197" y="712.0859"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="145" x="1204"
+              y="732.0811">PageStateGenerator
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="282"
+              x="1366" y="50"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="268" x="1373"
+              y="69.9951">PkceCodeChallengeVerifierGenerator
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="282"
+              x="1366" y="712.0859"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="268" x="1373"
+              y="732.0811">PkceCodeChallengeVerifierGenerator
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="265"
+              x="1713.5" y="50"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="251" x="1720.5"
+              y="69.9951">PkceCodeChallengeVerifierStorage
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="265"
+              x="1713.5" y="712.0859"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="251" x="1720.5"
+              y="732.0811">PkceCodeChallengeVerifierStorage
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="219"
+              x="1988.5" y="50"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="205" x="1995.5"
+              y="69.9951">RedirectUserToAuthorization
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="219"
+              x="1988.5" y="712.0859"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="205" x="1995.5"
+              y="732.0811">RedirectUserToAuthorization
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="221"
+              x="2217.5" y="50"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="207" x="2224.5"
+              y="69.9951">OnOAuth2AuthorizedHandler
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="221"
+              x="2217.5" y="712.0859"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="207" x="2224.5"
+              y="732.0811">OnOAuth2AuthorizedHandler
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="166"
+              x="2531" y="50"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="152" x="2538"
+              y="69.9951">OidcTokenExchanger
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="166"
+              x="2531" y="712.0859"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="152" x="2538"
+              y="732.0811">OidcTokenExchanger
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="153"
+              x="2754.5" y="50"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="139" x="2761.5"
+              y="69.9951">OidcTokensStorage
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="153"
+              x="2754.5" y="712.0859"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="139" x="2761.5"
+              y="732.0811">OidcTokensStorage
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="71"
+              x="2917.5" y="50"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="2924.5"
+              y="69.9951">browser
+        </text>
+        <rect fill="#E2E2F0" height="30.2969" rx="2.5" ry="2.5" style="stroke:#181818;stroke-width:0.5;" width="71"
+              x="2917.5" y="712.0859"/>
+        <text fill="#000000" font-family="sans-serif" font-size="14" lengthAdjust="spacing" textLength="57" x="2924.5"
+              y="732.0811">browser
+        </text>
+        <polygon fill="#181818" points="165.5,108.4297,175.5,112.4297,165.5,116.4297,169.5,112.4297"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="24" x2="171.5" y1="112.4297" y2="112.4297"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="122" x="31"
+              y="107.3638">Access Application
+        </text>
+        <polygon fill="#181818" points="396.5,137.5625,406.5,141.5625,396.5,145.5625,400.5,141.5625"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="177.5" x2="402.5" y1="141.5625" y2="141.5625"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="88" x="184.5"
+              y="136.4966">oAuth2login()
+        </text>
+        <polygon fill="#181818" points="569.5,166.6953,579.5,170.6953,569.5,174.6953,573.5,170.6953"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="408.5" x2="575.5" y1="170.6953" y2="170.6953"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="42" x="415.5"
+              y="165.6294">login()
+        </text>
+        <polygon fill="#181818" points="1264.5,195.8281,1274.5,199.8281,1264.5,203.8281,1268.5,199.8281"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="581.5" x2="1270.5" y1="199.8281" y2="199.8281"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="102" x="588.5"
+              y="194.7622">generateState()
+        </text>
+        <polygon fill="#181818" points="1106.5,224.9609,1096.5,228.9609,1106.5,232.9609,1102.5,228.9609"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="1100.5" x2="1275.5" y1="228.9609" y2="228.9609"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="157" x="1112.5"
+              y="223.895">storeOauth2State(state)
+        </text>
+        <polygon fill="#181818" points="1495,254.0938,1505,258.0938,1495,262.0938,1499,258.0938"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="581.5" x2="1501" y1="258.0938" y2="258.0938"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="149" x="588.5"
+              y="253.0278">generateCodeVerifier()
+        </text>
+        <polygon fill="#181818" points="1834,283.2266,1844,287.2266,1834,291.2266,1838,287.2266"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="1507" x2="1840" y1="287.2266" y2="287.2266"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="234" x="1514"
+              y="282.1606">storePkceCodeVerifier(codeVerifier)
+        </text>
+        <polygon fill="#181818" points="1495,312.3594,1505,316.3594,1495,320.3594,1499,316.3594"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="581.5" x2="1501" y1="316.3594" y2="316.3594"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="282" x="588.5"
+              y="311.2935">generateCodeChallengeValue(codeVerifier)
+        </text>
+        <polygon fill="#181818" points="1834,341.4922,1844,345.4922,1834,349.4922,1838,345.4922"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="1507" x2="1840" y1="345.4922" y2="345.4922"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="315" x="1514"
+              y="340.4263">storeOauth2PkceCodeChallenge(codeChallenge)
+        </text>
+        <polygon fill="#181818" points="912.5,370.625,922.5,374.625,912.5,378.625,916.5,374.625"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="581.5" x2="918.5" y1="374.625" y2="374.625"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="319" x="588.5"
+              y="369.5591">buildUriFor(config, state, codeChallenge, scopes)
+        </text>
+        <polygon fill="#181818" points="592.5,399.7578,582.5,403.7578,592.5,407.7578,588.5,403.7578"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="586.5" x2="923.5" y1="403.7578" y2="403.7578"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="105" x="598.5"
+              y="398.6919">authorizationUrl
+        </text>
+        <polygon fill="#181818" points="2086,428.8906,2096,432.8906,2086,436.8906,2090,432.8906"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="581.5" x2="2092" y1="432.8906" y2="432.8906"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="200" x="588.5"
+              y="427.8247">redirectToUrl(authorizationUrl)
+        </text>
+        <polygon fill="#181818" points="2941,458.0234,2951,462.0234,2941,466.0234,2945,462.0234"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="2098" x2="2947" y1="462.0234" y2="462.0234"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="155" x="2105"
+              y="456.9575">Open Authorization URL
+        </text>
+        <polygon fill="#181818" points="35,487.1563,25,491.1563,35,495.1563,31,491.1563"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="29" x2="2952" y1="491.1563" y2="491.1563"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="129" x="41"
+              y="486.0903">Login and Authorize
+        </text>
+        <polygon fill="#181818" points="188.5,516.2891,178.5,520.2891,188.5,524.2891,184.5,520.2891"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="182.5" x2="2952" y1="520.2891" y2="520.2891"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="214" x="194.5"
+              y="515.2231">Redirect with Authorization Code
+        </text>
+        <polygon fill="#181818" points="396.5,545.4219,406.5,549.4219,396.5,553.4219,400.5,549.4219"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="177.5" x2="402.5" y1="549.4219" y2="549.4219"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="207" x="184.5"
+              y="544.356">onOauth2Authorize(state, code)
+        </text>
+        <polygon fill="#181818" points="2316,574.5547,2326,578.5547,2316,582.5547,2320,578.5547"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="408.5" x2="2322" y1="578.5547" y2="578.5547"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="157" x="415.5"
+              y="573.4888">handle(state, authCode)
+        </text>
+        <polygon fill="#181818" points="1106.5,603.6875,1096.5,607.6875,1106.5,611.6875,1102.5,607.6875"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="1100.5" x2="2327" y1="607.6875" y2="607.6875"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="142" x="1112.5"
+              y="602.6216">retrieveOauth2State()
+        </text>
+        <polygon fill="#181818" points="2602,632.8203,2612,636.8203,2602,640.8203,2606,636.8203"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="2328" x2="2608" y1="636.8203" y2="636.8203"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="262" x="2335"
+              y="631.7544">exchangeCodeOnOidcTokens(authCode)
+        </text>
+        <polygon fill="#181818" points="2819,661.9531,2829,665.9531,2819,669.9531,2823,665.9531"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="2614" x2="2825" y1="665.9531" y2="665.9531"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="193" x="2621"
+              y="660.8872">storeOidcTokens(oidcTokens)
+        </text>
+        <polygon fill="#181818" points="35,691.0859,25,695.0859,35,699.0859,31,695.0859"
+                 style="stroke:#181818;stroke-width:1.0;"/>
+        <line style="stroke:#181818;stroke-width:1.0;" x1="29" x2="2327" y1="695.0859" y2="695.0859"/>
+        <text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="173" x="41"
+              y="690.02">Close Authorization Dialog
+        </text><!--SRC=[ZLJ1Rjim3BtxAuIUKg3RW1nz691bQtVea29BTbTbrXQgIOOihyM-VYGjAPQD3hqa5FaU9PAFbYeuByu3U247CU9_rKiVjDAzj45SQTl0wySk_3QVv1WwvHeuWcp0i- -AI6IKf8DkrCEpWdFGPc3CIDO2HFcszwxL5d_S67v8ArlmZ3VaZewIjaEMy_gl3DhPizTVHcsQo1hpiUGyO9gVGGRySHvj1lV9-GRs3YnuYGH63z6r06EHUsp9lfF6W6tX5tZzfC6Nv1vXx-SMZqGGdHUFF4AZFQX0SpkveYLCyp6-wBWz47IRyD1ybxOniNaqZdXUJ_Fadi5-UrMTj6b4eN2zGHdcnJ0ZEggAj2O-V6Rvr6Ad50o3sFMzqOeBgIX00DPEBRZCBGjZSrsnaw9pfTGYXUTUGgNnrQAT9ZFD694fGgWiYHe9sFH9eXEISUl4SRINl3JID4bC7-C9ohECsPC0CbhD3k-ywI8UQKPOPFZFtLDbAmboWdnQl-6oOBLu90CNyDRHo-sJRc-cDj-88WjwbUjXm9bbzdfmibnhixewIRhEriaXRhCaNbSfJgn7xru6od_eiH75eeZpyRwASQwDSVmz4hW66Gnpq2JMj7xYHOTkaPNwkPAkdVgTKsvcZPffURQ2jUZOI4WAxHaz0oqqwo5u3NyAsQxmvThM0g99oV43aHTtSxcnfEGaSPEJeYvCbytLxLEJzyODiEZRLornvFy0]-->
+    </g>
+</svg>

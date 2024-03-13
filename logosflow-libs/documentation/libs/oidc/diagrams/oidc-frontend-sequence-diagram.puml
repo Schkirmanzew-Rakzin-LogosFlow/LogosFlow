@@ -1,0 +1,37 @@
+@startuml
+actor User as user
+participant "index.html/authcodeReader.html" as html
+participant "OidcPkceUtils" as utils
+participant "Oauth2LoginLogoutManager" as loginManager
+participant "AuthorizationUriBuilder" as uriBuilder
+participant "PageStateStorage" as pageState
+participant "PageStateGenerator" as stateGen
+participant "PkceCodeChallengeVerifierGenerator" as pkceGen
+participant "PkceCodeChallengeVerifierStorage" as pkceStore
+participant "RedirectUserToAuthorization" as redirect
+participant "OnOAuth2AuthorizedHandler" as authHandler
+participant "OidcTokenExchanger" as tokenExchanger
+participant "OidcTokensStorage" as tokenStorage
+
+user -> html: Access Application
+html -> utils: oAuth2login()
+utils -> loginManager: login()
+loginManager -> stateGen: generateState()
+stateGen -> pageState: storeOauth2State(state)
+loginManager -> pkceGen: generateCodeVerifier()
+pkceGen -> pkceStore: storePkceCodeVerifier(codeVerifier)
+loginManager -> pkceGen: generateCodeChallengeValue(codeVerifier)
+pkceGen -> pkceStore: storeOauth2PkceCodeChallenge(codeChallenge)
+loginManager -> uriBuilder: buildUriFor(config, state, codeChallenge, scopes)
+uriBuilder -> loginManager: authorizationUrl
+loginManager -> redirect: redirectToUrl(authorizationUrl)
+redirect -> browser: Open Authorization URL
+browser -> user: Login and Authorize
+browser -> html: Redirect with Authorization Code
+html -> utils: onOauth2Authorize(state, code)
+utils -> authHandler: handle(state, authCode)
+authHandler -> pageState: retrieveOauth2State()
+authHandler -> tokenExchanger: exchangeCodeOnOidcTokens(authCode)
+tokenExchanger -> tokenStorage: storeOidcTokens(oidcTokens)
+authHandler -> user: Close Authorization Dialog
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+start
+:User initiates login;
+
+if (Is user already authenticated?) then (yes)
+  :Proceed to application;
+else (no)
+  :Generate state and PKCE challenge;
+  :Build authorization request URL;
+  :Redirect user to authorization endpoint;
+  :User authenticates and authorizes;
+  :Authorization server redirects user with code;
+  :Check state matches;
+  :Exchange authorization code for tokens;
+  :Store tokens in local storage;
+endif
+
+:Access protected resources with access token;
+stop
+@enduml
