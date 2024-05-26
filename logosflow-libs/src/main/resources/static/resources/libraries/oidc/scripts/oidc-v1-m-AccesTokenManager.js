@@ -1,29 +1,13 @@
 /**
   @author: Dmytro Shkirmantsev <shkirmantsev@gmail.com>
 */
-import OidcTokenExchanger from "./oidc-v1-m-OidcTokenExchanger.js";
-import PageStateStorage from "./oidc-v1-m-PageStateStorage.js";
 import OidcTokensStorage from "./oidc-v1-m-OidcTokensStorage.js";
+import PageStateStorage from "./oidc-v1-m-PageStateStorage.js";
 import { OidcClientConfiguration } from "./oidc-v1-pkce-lib.js";
-import Oauth2LoginLogoutManager from "./oidc-v1-m-Oauth2LoginLogoutManager.js";
+
 
 
 class AccesTokenManager {
-
-  /**
-   * 
-   * @param {String | Object} scopes - in format "openid email profile" or ["openid", "email", "profile"]
-   * @returns {Promise<String>} - OIDC JWT access token
-   */
-  static async getAccessToken(scopes = []) {
-    let accessToken = OidcTokensStorage.getAccessToken();
-
-    if (AccesTokenManager.isAccessTokenValid(accessToken, scopes)) {
-      return accessToken;
-    }
-
-    return await AccesTokenManager.refreshAndGetAccessToken(scopes);
-  }
 
   static async isAuthenticationSuccessful() {
 
@@ -75,28 +59,6 @@ class AccesTokenManager {
     }
     let storedTokenScopes = new Set(OidcTokensStorage.getScopes().split(' '));
     return scopesList.every(scope => storedTokenScopes.has(scope));
-  }
-
-  static async refreshAndGetAccessToken(scopes=[]) {
-    const refreshToken = OidcTokensStorage.getRefreshToken();
-
-    if (!refreshToken || OidcTokensStorage.isRefreshTokenExpired()) {
-      await Oauth2LoginLogoutManager.forceLogin(scopes);
-      if (await AccesTokenManager.isAuthenticationSuccessful()) {
-        return await AccesTokenManager.getAccessToken();
-      }
-
-    }
-
-    const oidcTokens = await OidcTokenExchanger.requestRefreshedOidcTokens(refreshToken);
-    
-    if(OidcTokensStorage.getSessionState()!=oidcTokens.oidcTokens["session_state"]){
-      await Oauth2LoginLogoutManager.logout();
-    }
-
-    OidcTokensStorage.storeOidcTokens(oidcTokens);
-
-    return OidcTokensStorage.getAccessToken();
   }
 }
 

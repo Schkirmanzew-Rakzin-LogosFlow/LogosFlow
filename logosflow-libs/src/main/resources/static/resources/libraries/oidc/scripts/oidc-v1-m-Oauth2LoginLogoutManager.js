@@ -1,16 +1,17 @@
 /**
   @author: Dmytro Shkirmantsev <shkirmantsev@gmail.com>
 */
-import AuthorizationUriBuilder from "./oidc-v1-m-AuthorizationUriBuilder.js";
 import AccesTokenManager from "./oidc-v1-m-AccesTokenManager.js";
+import AuthorizationUriBuilder from "./oidc-v1-m-AuthorizationUriBuilder.js";
+import OidcTokenExchanger from "./oidc-v1-m-OidcTokenExchanger.js";
 import OidcTokensStorage from "./oidc-v1-m-OidcTokensStorage.js";
-import { setupOIDCIFrame } from "./oidc-v1-m-setupOidcFrame.js";
-import { OidcClientConfiguration } from "./oidc-v1-pkce-lib.js";
+import PageStateGenerator from "./oidc-v1-m-PageStateGenerator.js";
 import PageStateStorage from "./oidc-v1-m-PageStateStorage.js";
 import PkceCodeChallengeVerifierGenerator from "./oidc-v1-m-PkceCodeChallengeVerifierGenerator.js";
-import PageStateGenerator from "./oidc-v1-m-PageStateGenerator.js";
 import PkceCodeChallengeVerifierStorage from "./oidc-v1-m-PkceCodeChallengeVerifierStorage.js";
 import RedirectUserToAuthorization from "./oidc-v1-m-RedirectUserToAuthorization.js";
+import { setupOIDCIFrame } from "./oidc-v1-m-setupOidcFrame.js";
+import { OidcClientConfiguration } from "./oidc-v1-pkce-lib.js";
 
 
 export class Oauth2LoginLogoutManager {
@@ -36,7 +37,7 @@ export class Oauth2LoginLogoutManager {
     }
   }
 
-  static async forceLogin(scopes=[]) {
+  static async forceLogin(scopes = []) {
     OidcTokensStorage.clear();
 
     let state = PageStateGenerator.generateState();
@@ -137,6 +138,43 @@ export class Oauth2LoginLogoutManager {
       win.postMessage(message, iframeOrigin);
     }
 
+  }
+
+  static async refreshAndGetAccessToken(scopes=[]) {
+    const refreshToken = OidcTokensStorage.getRefreshToken();
+
+    if (!refreshToken || OidcTokensStorage.isRefreshTokenExpired()) {
+      await Oauth2LoginLogoutManager.forceLogin(scopes);
+      if (await AccesTokenManager.isAuthenticationSuccessful()) {
+        return await AccesTokenManager.getAccessToken();
+      }
+
+    }
+
+    const oidcTokens = await OidcTokenExchanger.requestRefreshedOidcTokens(refreshToken);
+    
+    if(OidcTokensStorage.getSessionState()!=oidcTokens.oidcTokens["session_state"]){
+      await Oauth2LoginLogoutManager.logout();
+    }
+
+    OidcTokensStorage.storeOidcTokens(oidcTokens);
+
+    return OidcTokensStorage.getAccessToken();
+  }
+
+  /**
+ * 
+ * @param {String | Object} scopes - in format "openid email profile" or ["openid", "email", "profile"]
+ * @returns {Promise<String>} - OIDC JWT access token
+ */
+  static async getAccessToken(scopes = []) {
+    let accessToken = OidcTokensStorage.getAccessToken();
+
+    if (AccesTokenManager.isAccessTokenValid(accessToken, scopes)) {
+      return accessToken;
+    }
+
+    return await Oauth2LoginLogoutManager.refreshAndGetAccessToken(scopes);
   }
 };
 

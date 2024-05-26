@@ -1,22 +1,42 @@
 @startuml
 class OidcPkceUtils {
-  +oidcClientConfiguration
-  +oAuth2login()
-  +oAuth2logout()
-  +forceLogin()
-  +onOauth2Authorize()
-  +getAccessToken()
+  +{static} oidcClientConfiguration
+  +{static} oAuth2login()
+  +{static} oAuth2logout()
+  +{static} forceLogin()
+  +{static} onOauth2Authorize()
+  +{static} getAccessToken()
+}
+
+class OidcClientConfiguration{
+  + authorizationEndpoint
+  + tokenEndpoint
+  + tokenEndpoint
+  + userInfoEndpoint
+  + endSessionEndpoint
+  + check_session_iframe
+  + session_state
+  + clientId
+  + redirectUri
+  + scope
+  + responseType
+  + pkce
 }
 
 class Oauth2LoginLogoutManager {
-  -login()
-  -forceLogin(scopes)
-  -logout()
-  -listenRemoteLogout()
+
+  +{static} forceLogin(scopes)
+  +{static} logout()
+  -{static} clearOauth2StoredData()
+  ~{static} login()
+  ~{static} getAccessToken(scopes)
+  -{static} waitUntilLoginIsSuccessful()
+  -{static} listenRemoteLogout()
+  -{static} refreshAndGetAccessToken(scopes)
 }
 
 class AuthorizationUriBuilder {
-  +buildUriFor(config, state, codeChallenge, scopes)
+  +{static} buildUriFor(config, state, codeChallenge, scopes)
 }
 
 class PageStateStorage {
@@ -26,61 +46,78 @@ class PageStateStorage {
 }
 
 class PageStateGenerator {
-  +generateState()
-  +generateRandomString(length)
++generateState()
++generateRandomString(length)
 }
 
 class PkceCodeChallengeVerifierGenerator {
-  +generateCodeVerifier()
-  +generateCodeChallengeValue(codeVerifier)
++generateCodeVerifier()
++generateCodeChallengeValue(codeVerifier)
 }
 
 class PkceCodeChallengeVerifierStorage {
-  +storeOauth2PkceCodeChallenge(codeChallenge)
-  +storePkceCodeVerifier(codeVerifier)
-  +retrievePkceCodeVerifier()
-  +retrievePkceCodeChallenge()
-  +clearPair()
++storeOauth2PkceCodeChallenge(codeChallenge)
++storePkceCodeVerifier(codeVerifier)
++retrievePkceCodeVerifier()
++retrievePkceCodeChallenge()
++clearPair()
 }
 
 class RedirectUserToAuthorization {
-  +redirectToUrl(authorizationUrl)
++redirectToUrl(authorizationUrl)
 }
 
 class OnOAuth2AuthorizedHandler {
-  +handle(state, authCode)
++handle(state, authCode)
 }
 
 class OidcTokenExchanger {
-  +exchangeCodeOnOidcTokens(authCode)
-  +requestRefreshedOidcTokens(refreshToken)
++{static} exchangeCodeOnOidcTokens(authCode)
+-{static} exchangeAuthCodeOnTokens(authCode, codeVerifier)
+-{static} cleanHistoryForCodeExchange()
++{static} requestRefreshedOidcTokens(refreshToken)
 }
 
 class OidcTokensStorage {
-  +storeOidcTokens(oidcTokens)
-  +getAccessToken()
-  +getRefreshToken()
-  +getIdToken()
-  +getScopes()
-  +getSessionState()
-  +clear()
++storeOidcTokens(oidcTokens)
++getAccessToken()
++getRefreshToken()
++getIdToken()
++getScopes()
++getSessionState()
++clear()
 }
 
 class TokenParser {
-  +parseJwtToJsonPayloadAsString(jwtTokenAsJwtString)
-  +parseJwtPayloadStringToObject(jwtPayloadJsonAsString)
-  +getExpirationTimeUtc(jwtTokenAsJwtString)
++parseJwtToJsonPayloadAsString(jwtTokenAsJwtString)
++parseJwtPayloadStringToObject(jwtPayloadPartAsJson)
++getExpirationTimeUtc(jwtTokenAsJwtString)
+}
+
+class AccesTokenManager {
++{static} isAuthenticationSuccessful()
++{static} isAccessTokenValid(accessToken, scopes)
+
 }
 
 OidcPkceUtils --> Oauth2LoginLogoutManager
-Oauth2LoginLogoutManager --> AuthorizationUriBuilder
-Oauth2LoginLogoutManager --> PageStateStorage
+OidcPkceUtils --> OnOAuth2AuthorizedHandler: uses for onOauth2Authorize >
+OidcPkceUtils --> OidcClientConfiguration
+Oauth2LoginLogoutManager --> AuthorizationUriBuilder: uses for forceLogin, Login >
+Oauth2LoginLogoutManager --> AccesTokenManager: uses for getAccessToken, waitUntilLoginIsSuccessful, login >
+Oauth2LoginLogoutManager --> OidcTokenExchanger: uses for refreshAndGetAccessToken >
+Oauth2LoginLogoutManager --> PageStateStorage: uses for forceLogin, clearOauth2StoredData >
 Oauth2LoginLogoutManager --> PageStateGenerator
 Oauth2LoginLogoutManager --> PkceCodeChallengeVerifierGenerator
 Oauth2LoginLogoutManager --> PkceCodeChallengeVerifierStorage
 Oauth2LoginLogoutManager --> RedirectUserToAuthorization
 Oauth2LoginLogoutManager --> OnOAuth2AuthorizedHandler
 OnOAuth2AuthorizedHandler --> OidcTokenExchanger
-OnOAuth2AuthorizedHandler --> OidcTokensStorage
+AccesTokenManager --> PageStateStorage: uses for isAuthenticationSuccessful >
+AccesTokenManager --> OidcTokensStorage: uses for isAuthenticationSuccessful(), isAccessTokenValid >
+AccesTokenManager --> OidcClientConfiguration
+
 OidcTokenExchanger --> TokenParser
+OidcTokensStorage --> TokenParser
+OnOAuth2AuthorizedHandler --> OidcTokensStorage
 @enduml
