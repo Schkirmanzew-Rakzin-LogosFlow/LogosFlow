@@ -3,7 +3,6 @@
 */
 import Oauth2LoginLogoutManager from "./oidc-v1-m-Oauth2LoginLogoutManager.js";
 import OnOAuth2AuthorizedHandler from "./oidc-v1-m-onOauth2AuthorizeHandler.js";
-import AccesTokenManager from "./oidc-v1-m-AccesTokenManager.js";
 
 const OIDC_SERVER_WELL_KNOWN_CONFIGURATION_URL = "http://localhost:49088/realms/logosflow/.well-known/openid-configuration";
 
@@ -51,7 +50,7 @@ export const OidcPkceUtils = {
    */
   forceLogin: Oauth2LoginLogoutManager.forceLogin,
   onOauth2Authorize: OnOAuth2AuthorizedHandler.handle,
-  getAccessToken: AccesTokenManager.getAccessToken
+  getAccessToken: Oauth2LoginLogoutManager.getAccessToken
 };
 
 window.OidcPkceUtils = OidcPkceUtils;
