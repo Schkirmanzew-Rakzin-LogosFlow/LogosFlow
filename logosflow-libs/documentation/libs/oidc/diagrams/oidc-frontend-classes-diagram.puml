@@ -1,0 +1,86 @@
+@startuml
+class OidcPkceUtils {
+  +oidcClientConfiguration
+  +oAuth2login()
+  +oAuth2logout()
+  +forceLogin()
+  +onOauth2Authorize()
+  +getAccessToken()
+}
+
+class Oauth2LoginLogoutManager {
+  -login()
+  -forceLogin(scopes)
+  -logout()
+  -listenRemoteLogout()
+}
+
+class AuthorizationUriBuilder {
+  +buildUriFor(config, state, codeChallenge, scopes)
+}
+
+class PageStateStorage {
+  +storeOauth2State(state)
+  +retrieveOauth2State()
+  +clear()
+}
+
+class PageStateGenerator {
+  +generateState()
+  +generateRandomString(length)
+}
+
+class PkceCodeChallengeVerifierGenerator {
+  +generateCodeVerifier()
+  +generateCodeChallengeValue(codeVerifier)
+}
+
+class PkceCodeChallengeVerifierStorage {
+  +storeOauth2PkceCodeChallenge(codeChallenge)
+  +storePkceCodeVerifier(codeVerifier)
+  +retrievePkceCodeVerifier()
+  +retrievePkceCodeChallenge()
+  +clearPair()
+}
+
+class RedirectUserToAuthorization {
+  +redirectToUrl(authorizationUrl)
+}
+
+class OnOAuth2AuthorizedHandler {
+  +handle(state, authCode)
+}
+
+class OidcTokenExchanger {
+  +exchangeCodeOnOidcTokens(authCode)
+  +requestRefreshedOidcTokens(refreshToken)
+}
+
+class OidcTokensStorage {
+  +storeOidcTokens(oidcTokens)
+  +getAccessToken()
+  +getRefreshToken()
+  +getIdToken()
+  +getScopes()
+  +getSessionState()
+  +clear()
+}
+
+class TokenParser {
+  +parseJwtToJsonPayloadAsString(jwtTokenAsJwtString)
+  +parseJwtPayloadStringToObject(jwtPayloadJsonAsString)
+  +getExpirationTimeUtc(jwtTokenAsJwtString)
+}
+
+OidcPkceUtils --> Oauth2LoginLogoutManager
+Oauth2LoginLogoutManager --> AuthorizationUriBuilder
+Oauth2LoginLogoutManager --> PageStateStorage
+Oauth2LoginLogoutManager --> PageStateGenerator
+Oauth2LoginLogoutManager --> PkceCodeChallengeVerifierGenerator
+Oauth2LoginLogoutManager --> PkceCodeChallengeVerifierStorage
+Oauth2LoginLogoutManager --> RedirectUserToAuthorization
+Oauth2LoginLogoutManager --> OnOAuth2AuthorizedHandler
+OnOAuth2AuthorizedHandler --> OidcTokenExchanger
+OnOAuth2AuthorizedHandler --> OidcTokensStorage
+OidcTokenExchanger --> TokenParser
+@enduml

@@ -1,0 +1,7 @@
+.PHONY: mvn/rebuild-all
+mvn/rebuild-all:
+	mvn clean install -N && \
+	cd logosflow-spring-boot-core && \
+	mvn clean install -N && \
+	cd ..
+	mvn clean install -T 1C
