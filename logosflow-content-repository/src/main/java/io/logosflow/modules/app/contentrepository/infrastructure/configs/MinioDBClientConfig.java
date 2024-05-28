@@ -1,4 +1,4 @@
-package io.logosflow.modules.contentrepository.infrastructure.configs;
+package io.logosflow.modules.app.contentrepository.infrastructure.configs;
 
 import io.minio.MinioClient;
 import lombok.RequiredArgsConstructor;

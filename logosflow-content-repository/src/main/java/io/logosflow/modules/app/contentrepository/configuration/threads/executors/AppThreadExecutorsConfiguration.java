@@ -1,4 +1,4 @@
-package io.logosflow.modules.contentrepository.threads.executors;
+package io.logosflow.modules.app.contentrepository.configuration.threads.executors;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package io.logosflow.modules.contentrepository;
+package io.logosflow.modules.app.contentrepository;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

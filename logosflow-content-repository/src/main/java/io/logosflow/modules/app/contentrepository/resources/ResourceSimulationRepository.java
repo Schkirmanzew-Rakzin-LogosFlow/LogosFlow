@@ -1,7 +1,9 @@
-package io.logosflow.modules.contentrepository.resources;
+package io.logosflow.modules.app.contentrepository.resources;
 
+import io.logosflow.modules.app.contentrepository.configuration.threads.executors.AppThreadExecutorsConfiguration;
 import lombok.Data;
 import lombok.SneakyThrows;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Repository;
 
 import java.time.Instant;
@@ -11,9 +13,10 @@ import java.time.Instant;
  */
 @Repository
 @Data
-public class ResourceRepository {
+public class ResourceSimulationRepository {
 
     @SneakyThrows
+    @Async(AppThreadExecutorsConfiguration.APP_CASHED_POOL_EXECUTOR)
     public String getResourceByTiming(String resourceId, Long timeout) {
         var started = Instant.now();
 

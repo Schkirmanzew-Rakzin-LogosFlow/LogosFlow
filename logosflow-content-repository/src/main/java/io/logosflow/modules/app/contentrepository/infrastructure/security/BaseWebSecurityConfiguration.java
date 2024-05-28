@@ -1,4 +1,4 @@
-package io.logosflow.modules.contentrepository.infrastructure.security;
+package io.logosflow.modules.app.contentrepository.infrastructure.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
