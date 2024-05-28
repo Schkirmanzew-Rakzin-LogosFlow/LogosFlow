@@ -6,12 +6,11 @@
 
     <parent>
         <groupId>io.logosflow.modules</groupId>
-        <artifactId>logosflow-spring-boot-core</artifactId>
+        <artifactId>logosflow-spring-boot-app-core</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../logosflow-spring-boot-core/pom.xml</relativePath>
+        <relativePath>../logosflow-spring-boot-core/logosflow-spring-boot-app-core/pom.xml</relativePath>
     </parent>
 
-    <groupId>io.logosflow.modules</groupId>
     <artifactId>logosflow-content-repository</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>jar</packaging>
@@ -19,6 +18,10 @@
     <name>logosflow-content-repository</name>
 
     <description>This microservice is responsible for storing content data to scalable DB</description>
+
+    <properties>
+        <minio.version>8.5.10</minio.version>
+    </properties>
 
     <dependencyManagement>
         <dependencies>
@@ -28,6 +31,11 @@
                 <version>${logosflow-parent.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.minio</groupId>
+                <artifactId>minio</artifactId>
+                <version>${minio.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -49,6 +57,15 @@
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.uuid</groupId>
+            <artifactId>java-uuid-generator</artifactId>
+            <version>5.0.0</version>
         </dependency>
     </dependencies>
 

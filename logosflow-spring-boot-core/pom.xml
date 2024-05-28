@@ -11,12 +11,18 @@
 
     <artifactId>logosflow-spring-boot-core</artifactId>
     <packaging>pom</packaging>
+
     <version>${logosflow-parent.version}</version>
 
     <name>logosflow-spring-boot-core</name>
     <description>The core of Spring Boot application</description>
 
+    <modules>
+        <module>logosflow-spring-boot-app-core</module>
+    </modules>
+
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring-boot.version>2.7.9</spring-boot.version>
         <testcontainers.version>1.17.6</testcontainers.version>
     </properties>
