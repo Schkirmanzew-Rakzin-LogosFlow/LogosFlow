@@ -23,6 +23,7 @@
         <module>logosflow-gateway</module>
         <module>spa-demo-endpoint</module>
         <module>logosflow-libs</module>
+        <module>logosflow-content-repository</module>
     </modules>
 
     <properties>
