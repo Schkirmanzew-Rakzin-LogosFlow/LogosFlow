@@ -3,22 +3,18 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.7.9</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <groupId>io.logosflow.modules</groupId>
+        <artifactId>logosflow-spring-boot-core</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../logosflow-spring-boot-core/pom.xml</relativePath>
     </parent>
 
-    <groupId>io.logosflow.modules</groupId>
     <artifactId>spa-demo-endpoint</artifactId>
     <packaging>jar</packaging>
 
     <name>spa-demo-endpoint</name>
 
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>11</java.version>
-
         <logosflow-parent.version>1.0.0-SNAPSHOT</logosflow-parent.version>
         <spring-boot.version>2.7.9</spring-boot.version>
     </properties>
@@ -95,12 +91,13 @@
     </pluginRepositories>
 
     <build>
-        <finalName>spa-demo-endpoint</finalName>
+        <finalName>spa-demo-endpoint-${logosflow-parent.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <mainClass>io.logosflow.modules.demo.spaendpoint.DemoSpaApp</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>
