@@ -3,6 +3,8 @@ package io.logosflow.modules.app.contentrepository.infrastructure.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
 @EnableWebSecurity
@@ -10,10 +12,11 @@ public class BaseWebSecurityConfiguration {
 
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .headers().frameOptions().disable()
-                .httpStrictTransportSecurity().disable()
-                .and()
+                .csrf(AbstractHttpConfigurer::disable)
+                .headers(headers -> headers
+                        .frameOptions(HeadersConfigurer.FrameOptionsConfig::disable)
+                        .httpStrictTransportSecurity(HeadersConfigurer.HstsConfig::disable)
+                )
                 //TODO AUTH
                 .authorizeHttpRequests(requestCustomizer -> requestCustomizer
                         .anyRequest().permitAll()
