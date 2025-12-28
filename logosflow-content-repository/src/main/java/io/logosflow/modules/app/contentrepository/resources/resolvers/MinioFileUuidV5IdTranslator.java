@@ -11,7 +11,7 @@ import java.util.UUID;
 @Component
 public class MinioFileUuidV5IdTranslator extends AbstractUuidV5IdTranslator<ContentId> {
 
-    public static final String NAMESPACE = "d0328055-d723-41f9-8f08-29d407771d6b";
+    public static final String NAMESPACE_ID_STR = "d0328055-d723-41f9-8f08-29d407771d6b";
 
 
     public MinioFileUuidV5IdTranslator() {
@@ -20,6 +20,6 @@ public class MinioFileUuidV5IdTranslator extends AbstractUuidV5IdTranslator<Cont
 
     @Override
     public UUID namespace() {
-        return UUID.fromString(NAMESPACE);
+        return UUID.fromString(NAMESPACE_ID_STR);
     }
 }

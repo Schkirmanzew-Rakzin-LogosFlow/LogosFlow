@@ -17,7 +17,7 @@ import java.net.URISyntaxException;
 public class FileMinIoUriResolverImpl extends FileUriResolver {
 
     private static final String SCHEME = "urn";
-    private static final String MINIO_FILES_NAMESPACE = MinioFileUuidV5IdTranslator.NAMESPACE;
+    private static final String MINIO_FILES_NAMESPACE = MinioFileUuidV5IdTranslator.NAMESPACE_ID_STR;
 
     @Override
     public URI resolve(MultipartFile file) {
