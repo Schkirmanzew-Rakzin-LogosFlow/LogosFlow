@@ -31,33 +31,18 @@
     "--init",
     "--privileged",
     //"--network=host",
+    "--add-host=host.docker.internal:host-gateway", 
     "-p",
     "2222:22"
   ],
-  "postStartCommand": "sudo chmod 700 /home/codespace/.ssh &&
-  \
-  sudo
-  chmod
-  600
-  /home/codespace/.ssh/authorized_keys
-  &
-  &
-  \
-  sudo
-  chown
-  -R
-  codespace: codespace
-  /home/codespace/.ssh
-  &
-  &
-  \
-  sudo
-  service
-  ssh
-  restart
-  ",
+  "postStartCommand": "sudo chmod 700 /home/codespace/.ssh && \
+  sudo chmod 600 /home/codespace/.ssh/authorized_keys && \
+  sudo chown -R codespace: codespace /home/codespace/.ssh && \
+  sudo service ssh restart",
   "forwardPorts": [
-    2222
+    2222,
+    // forward the Sourcegraph port into the container
+    7080 
   ],
   "settings": {
     // Configure Java runtimes inside the container

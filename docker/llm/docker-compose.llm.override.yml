@@ -1,0 +1,176 @@
+# docker/llm/docker-compose.llm.override.yml
+
+name: mcpo-ai-stack
+
+networks:
+  mcpo_net:
+    driver: bridge
+    name: mcpo_net
+
+volumes:
+  llm-ollama: {}
+  llm-webui: {}
+  llm-models: {}
+
+services:
+  traefik:
+    image: traefik:v3.1.0
+    container_name: traefik_proxy
+    command:
+      - "--api.insecure=true"                 # DEV only
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:8081"
+      - "--entrypoints.websecure.address=:8443"
+      - "--entrypoints.admin.address=:8089"
+      - "--log.level=INFO"
+    ports:
+      - "8081:8081"
+      - "8443:8443"
+      - "127.0.0.1:8089:8089"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    networks: [mcpo_net]
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      # Admin auth (replace hash for prod)
+      - 'traefik.http.middlewares.admin-auth.basicauth.users=admin:$2a$12$6/xNlp.Zqpmu.hVMdDrD0elGzWgvR0z2oBs7PMfYHFIKQ9xdWv.Hm'
+      # Shared CORS (v3 uses accesscontrolalloworiginlist)
+      - "traefik.http.middlewares.cors.headers.accesscontrolalloworiginlist=*"
+      - "traefik.http.middlewares.cors.headers.accesscontrolallowmethods=GET,POST,OPTIONS"
+      - "traefik.http.middlewares.cors.headers.accesscontrolallowheaders=*,Authorization,Content-Type"
+      - "traefik.http.middlewares.cors.headers.addvaryheader=true"
+      # Shared rate limit
+      - "traefik.http.middlewares.ratelimit.ratelimit.average=20"
+      - "traefik.http.middlewares.ratelimit.ratelimit.burst=40"
+      - "traefik.http.middlewares.ratelimit.ratelimit.period=1s"
+      # Traefik dashboard on admin entrypoint
+      - "traefik.http.routers.traefik.rule=PathPrefix(`/dashboard`) || PathPrefix(`/api`)"
+      - "traefik.http.routers.traefik.entrypoints=admin"
+      - "traefik.http.routers.traefik.service=api@internal"
+      - "traefik.http.routers.traefik.middlewares=admin-auth"
+
+  openwebui_server:
+    image: ghcr.io/open-webui/open-webui:main
+    container_name: openwebui_server
+    restart: unless-stopped
+    environment:
+      - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-change-me}
+      - WEBUI_AUTH=${WEBUI_AUTH:-False}
+      - ENABLE_RAG_WEB_SEARCH=true
+      - ENABLE_RAG_LOCAL_WEB_FETCH=true
+      - WEBUI_URL=http://localhost:3000
+      - OPENAI_API_BASE_URLS=http://host.docker.internal:1234/v1
+      - OPENAI_API_KEYS=lm-studio
+      - MCPO_URL=http://crawl4ai:11235
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "${HTTP_PORT:-3000}:8080"
+    volumes:
+      - llm-webui:/app/backend/data
+    networks: [mcpo_net]
+
+  mcpo:
+    image: ghcr.io/open-webui/mcpo:main
+    container_name: mcpo
+    restart: unless-stopped
+    command: ["mcpo", "--config", "/app/config/config.json", "--server-type", "remote"]
+    volumes:
+      - ./docker/llm/mcpo/config:/app/config:ro
+    environment:
+      - LOG_LEVEL=DEBUG
+    networks: [mcpo_net]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=mcpo_net"
+      # add StripPrefix back
+      - "traefik.http.middlewares.mcpo-strip.stripprefix.prefixes=/mcpo"
+      - "traefik.http.middlewares.mcpo-strip.stripprefix.forceslash=true"
+      - "traefik.http.routers.mcpo_main.rule=PathPrefix(`/mcpo`)"
+      - "traefik.http.routers.mcpo_main.entrypoints=web"
+      - "traefik.http.routers.mcpo_main.priority=50"
+      - "traefik.http.routers.mcpo_main.middlewares=cors@docker,mcpo-strip@docker,ratelimit@docker"
+      - "traefik.http.services.mcpo_main.loadbalancer.server.port=8000"
+
+  crawl4ai:
+    image: unclecode/crawl4ai:latest
+    container_name: crawl4ai
+    restart: unless-stopped
+    shm_size: "1g"
+    expose:
+      - "11235"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=DEBUG
+      - DISABLE_REDIS=1
+    networks: [mcpo_net]
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=mcpo_net"
+      # Backend service
+      - "traefik.http.services.c4ai_svc.loadbalancer.server.port=11235"
+      # Handle direct Crawl4AI routes under /mcpo/crawl4ai
+      - "traefik.http.middlewares.c4ai_strip.stripprefix.prefixes=/mcpo/crawl4ai"
+      - "traefik.http.middlewares.c4ai_strip.stripprefix.forceslash=true"
+      - "traefik.http.routers.c4ai_all.rule=PathPrefix(`/mcpo/crawl4ai`)"
+      - "traefik.http.routers.c4ai_all.entrypoints=web"
+      - "traefik.http.routers.c4ai_all.priority=100"
+      - "traefik.http.routers.c4ai_all.middlewares=c4ai_strip@docker,cors@docker"
+      - "traefik.http.routers.c4ai_all.service=c4ai_svc"
+      # MCP SSE stream
+      - "traefik.http.routers.c4ai_mcp_sse.rule=PathPrefix(`/mcpo/crawl4ai/mcp/sse`)"
+      - "traefik.http.routers.c4ai_mcp_sse.entrypoints=web"
+      - "traefik.http.routers.c4ai_mcp_sse.middlewares=c4ai_strip@docker,cors@docker"
+      - "traefik.http.routers.c4ai_mcp_sse.service=c4ai_svc"
+      # MCP messages
+      - "traefik.http.routers.c4ai_mcp_messages.rule=PathPrefix(`/mcpo/crawl4ai/mcp/messages`)"
+      - "traefik.http.routers.c4ai_mcp_messages.entrypoints=web"
+      - "traefik.http.routers.c4ai_mcp_messages.middlewares=c4ai_strip@docker,cors@docker"
+      - "traefik.http.routers.c4ai_mcp_messages.service=c4ai_svc"
+      # MCP WebSocket
+      - "traefik.http.routers.c4ai_mcp_ws.rule=PathPrefix(`/mcpo/crawl4ai/mcp/ws`)"
+      - "traefik.http.routers.c4ai_mcp_ws.entrypoints=web"
+      - "traefik.http.routers.c4ai_mcp_ws.middlewares=c4ai_strip@docker,cors@docker"
+      - "traefik.http.routers.c4ai_mcp_ws.service=c4ai_svc"
+
+  # web-scraper:
+  #   build:
+  #     context: ./mcpo/services/web-scraper
+  #   container_name: web-scraper
+  #   restart: unless-stopped
+  #   environment:
+  #     PYTHONUNBUFFERED: "1"
+  #     UVICORN_WORKERS: "2"
+  #     SCRAPER_MAX_HTML_CHARS: "500000"
+  #   expose:
+  #     - "8000"
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-fsS", "http://localhost:8000/health"]
+  #     interval: 20s
+  #     timeout: 5s
+  #     retries: 5
+  #   networks: [mcpo]
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.scraper.rule=PathPrefix(`/api/v1/scrape`)"
+  #     - "traefik.http.routers.scraper.entrypoints=web"
+  #     - "traefik.http.routers.scraper.priority=10"
+  #     - "traefik.http.routers.scraper.middlewares=cors@docker,ratelimit@docker"
+  #     - "traefik.http.services.scraper.loadbalancer.server.port=8000"
+
+  # litellm_proxy:
+  #   image: ghcr.io/berriai/litellm:main-latest
+  #   restart: unless-stopped
+  #   depends_on:
+  #     ollama_server:
+  #       condition: service_healthy
+  #   environment:
+  #     - LITELLM_MASTER_KEY=${LITELLM_MASTER_KEY:-sk-local-demo}
+  #     - LITELLM_PORT=4000
+  #     - LITELLM_CONFIG_PATH=/app/config.yml
+  #   ports:
+  #     - "4000:4000"
+  #   volumes:
+  #     - ./docker/llm/litellm.yml:/app/config.yml:ro

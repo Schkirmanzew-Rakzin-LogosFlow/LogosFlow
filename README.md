@@ -12,11 +12,10 @@ make mvn/rebuild-all
 
 ### Local
 
-Configure network access required to Keycloak by adding `host.docker.internal` to `/etc/hosts`:
+To allow your browser to find the local services, you need to add entries to your `/etc/hosts` file (or `C:\Windows\System32\drivers\etc\hosts` on Windows).
 ```shell
-cat /etc/hosts
-[...]
-127.0.0.1: host.docker.internal
+# Add the following line if it's not already there:
+127.0.0.1 cody.local.dev
 ```
 ## Start the project containers:
 - Run docker-compose:

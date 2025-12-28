@@ -1,0 +1,7 @@
+# Dynamic configuration for TLS
+tls:
+  options:
+    default:
+      minVersion: "VersionTLS12"
+      maxVersion: "VersionTLS13"
+      sniStrict: false
