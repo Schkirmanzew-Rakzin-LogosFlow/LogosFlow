@@ -1,0 +1,32 @@
+model_list:
+  - model_name: qwen-coder-7b
+    litellm_params:
+      provider: ollama
+      model: qwen-coder-7b
+      base_url: http://ollama_server:11434
+  - model_name: deepseek-qwen3-8b
+    litellm_params:
+      provider: ollama
+      model: deepseek-qwen3-8b
+      base_url: http://ollama_server:11434
+  - model_name: qwen3-4b
+    litellm_params:
+      provider: ollama
+      model: qwen3-4b
+      base_url: http://ollama_server:11434
+  - model_name: qwen3-8b
+    litellm_params:
+      provider: ollama
+      model: qwen3-8b
+      base_url: http://ollama_server:11434
+  - model_name: mistral-7b
+    litellm_params:
+      provider: ollama
+      model: mistral-7b
+      base_url: http://ollama_server:11434
+router_settings:
+  num_retries: 2
+  timeout: 120
+
+general_settings:
+  telemetry: false

@@ -1,0 +1,13 @@
+FROM deepseek/deepseek-r1-0528-qwen3-8b:q4_K_M
+PARAMETER stop "</s>"
+PARAMETER temperature 0.1
+PARAMETER num_ctx 4096
+PARAMETER num_gpu 0
+PARAMETER num_thread 14
+PARAMETER num_batch 128
+TEMPLATE """<|im_start|>system
+{{ .System }}<|im_end|>
+<|im_start|>user
+{{ .Prompt }}<|im_end|>
+<|im_start|>assistant
+"""

@@ -1,0 +1,8 @@
+<!-- .devcontainer/settings.xml -->
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+    <!-- Local repo directory is set via the M2_REPO_PATH environment variable -->
+    <localRepository>${env.M2_REPO_PATH}/repository</localRepository>
+    <!-- Additional configuration can go here (mirrors, proxies, profiles) -->
+</settings>

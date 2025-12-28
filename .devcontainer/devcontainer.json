@@ -1,0 +1,151 @@
+// devcontainer.json
+// Ensure you export M2_REPO_PATH on your host to point to your local .m2 directory
+// e.g., export M2_REPO_PATH=/mnt/SharedD/Work/.m2 on Linux or wherever on macOS.
+{
+  "name": "Slim Multi-Lang + Kubernetes DevContainer",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  // Use 'codespace' user for consistency across environments
+  "remoteUser": "codespace",
+  "containerEnv": {
+    // Path inside container where Maven settings and repo live
+    "M2_REPO_PATH": "/home/codespace/.m2",
+    // Ensure Maven picks up the local repository location
+    "MAVEN_OPTS": "-Dmaven.repo.local=/home/codespace/.m2/repository"
+  },
+  "mounts": [
+    // Bind SSH public key for passwordless login
+    "source=${localEnv:HOME}/.ssh/id_rsa.pub,target=/home/codespace/.ssh/authorized_keys,type=bind,consistency=cached",
+    // Bind your host .m2 directory (via host env M2_REPO_PATH) into the container
+    "source=${localEnv:M2_REPO_PATH},target=/home/codespace/.m2,type=bind,consistency=cached",
+    // Optional settings.xml override: maps from your workspace
+    "source=${localWorkspaceFolder}/.devcontainer/settings.xml,target=/home/codespace/.m2/settings.xml,type=bind,consistency=cached",
+    // Docker socket to allow docker/podman inside container
+    "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind",
+    // Mount project root for IDE and tooling
+    "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
+  ],
+  "runArgs": [
+    "--init",
+    "--privileged",
+    //"--network=host",
+    "--add-host=host.docker.internal:host-gateway", 
+    "-p",
+    "2222:22"
+  ],
+  "postStartCommand": "sudo chmod 700 /home/codespace/.ssh && \
+  sudo chmod 600 /home/codespace/.ssh/authorized_keys && \
+  sudo chown -R codespace: codespace /home/codespace/.ssh && \
+  sudo service ssh restart",
+  "forwardPorts": [
+    2222,
+    // forward the Sourcegraph port into the container
+    7080 
+  ],
+  "settings": {
+    // Configure Java runtimes inside the container
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.configuration.runtimes": [
+      {
+        "name": "JavaSE-21",
+        "path": "/usr/lib/jvm/java-21-amazon-corretto",
+        "default": true
+      }
+    ]
+  },
+  "extensions": [
+    "ms-python.python",
+    "ms-vscode.go",
+    "redhat.java",
+    "ms-azuretools.vscode-docker",
+    "hashicorp.terraform",
+    "766b.go-outliner",
+    "alexcvzz.vscode-sqlite",
+    "codezombiech.gitignore",
+    "davidanson.vscode-markdownlint",
+    "donjayamanne.githistory",
+    "dunstontc.vscode-go-syntax",
+    "eamodio.gitlens",
+    "ecmel.vscode-spring-boot",
+    "esbenp.prettier-vscode",
+    "felipecaputo.git-project-manager",
+    "firefox-devtools.vscode-firefox-debug",
+    "formulahendry.code-runner",
+    "georgewfraser.vscode-javac",
+    "github.remotehub",
+    "github.vscode-github-actions",
+    "github.vscode-pull-request-github",
+    "golang.go",
+    "gruntfuggly.todo-tree",
+    "humao.rest-client",
+    "inercia.vscode-k3d",
+    "jebbs.plantuml",
+    "jeff-hykin.better-dockerfile-syntax",
+    "joaoacdias.golang-tdd",
+    "loiane.java-spring-extension-pack",
+    "mechatroner.rainbow-csv",
+    "mhutchie.git-graph",
+    "michelemelluso.gitignore",
+    "mongodb.mongodb-vscode",
+    "ms-azuretools.vscode-containers",
+    "ms-edgedevtools.vscode-edge-devtools",
+    "ms-kubernetes-tools.vscode-kubernetes-tools",
+    "ms-ossdata.vscode-postgresql",
+    "ms-python.debugpy",
+    "ms-python.vscode-pylance",
+    "ms-vscode-remote.remote-containers",
+    "ms-vscode-remote.remote-ssh",
+    "ms-vscode-remote.remote-ssh-edit",
+    "ms-vscode-remote.remote-wsl",
+    "ms-vscode-remote.vscode-remote-extensionpack",
+    "ms-vscode.azure-repos",
+    "ms-vscode.live-server",
+    "ms-vscode.makefile-tools",
+    "ms-vscode.remote-explorer",
+    "ms-vscode.remote-repositories",
+    "ms-vscode.remote-server",
+    "msyrus.go-doc",
+    "neonxp.gotools",
+    "nicolasvuillamy.vscode-groovy-lint",
+    "oderwat.indent-rainbow",
+    "pleiades.java-extension-pack-jdk",
+    "pomber.git-file-history",
+    "redhat.fabric8-analytics",
+    "redhat.vscode-community-server-connector",
+    "redhat.vscode-rsp-ui",
+    "redhat.vscode-xml",
+    "redhat.vscode-yaml",
+    "ritwickdey.liveserver",
+    "ryanluker.vscode-coverage-gutters",
+    "saoudrizwan.claude-dev",
+    "shardulm94.trailing-spaces",
+    "shengchen.vscode-checkstyle",
+    "sonarsource.sonarlint-vscode",
+    "sourcegraph.cody-ai",
+    "streetsidesoftware.code-spell-checker",
+    "tabnine.tabnine-vscode",
+    "techer.open-in-browser",
+    "tomoki1207.pdf",
+    "visualstudioexptteam.intellicode-api-usage-examples",
+    "visualstudioexptteam.vscodeintellicode",
+    "vmware.vscode-boot-dev-pack",
+    "vmware.vscode-spring-boot",
+    "vscjava.vscode-gradle",
+    "vscjava.vscode-java-debug",
+    "vscjava.vscode-java-dependency",
+    "vscjava.vscode-java-pack",
+    "vscjava.vscode-java-test",
+    "vscjava.vscode-maven",
+    "vscjava.vscode-spring-boot-dashboard",
+    "vscjava.vscode-spring-initializr",
+    "waderyan.gitblame",
+    "wayou.vscode-todo-highlight",
+    "xabikos.javascriptsnippets",
+    "xyz.plsql-language",
+    "yokoe.vscode-postfix-go",
+    "yzhang.markdown-all-in-one",
+    "zxh404.vscode-proto3"
+  ]
+}

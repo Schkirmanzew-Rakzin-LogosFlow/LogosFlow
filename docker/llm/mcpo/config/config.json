@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "crawl4ai": {
+      "type": "sse",
+      "url": "http://crawl4ai:11235/mcp/sse",
+      "headers": {
+        "Accept": "text/event-stream",
+        "Cache-Control": "no-cache",
+        "Connection": "keep-alive"
+      }
+    }
+  }
+}
