@@ -15,12 +15,12 @@ import java.net.URI;
  * @author Shkirmantsev
  */
 @Repository
-public class MinIoFileContentsDedicatedAbstractRepository extends MinIoSpecialContentDedicatedAbstractRepository {
+public class MinIoFileContentsDedicatedRepository extends MinIoSpecialContentDedicatedAbstractRepository {
 
     protected final MinioFileUuidV5IdTranslator minioFileUuidV5IdTranslator;
     private final FileUriResolver fileUriResolver;
 
-    public MinIoFileContentsDedicatedAbstractRepository(
+    public MinIoFileContentsDedicatedRepository(
             MinioService service,
             MinioFileUuidV5IdTranslator minioFileUuidV5IdTranslator,
             FileUriResolver fileUriResolver
@@ -51,6 +51,6 @@ public class MinIoFileContentsDedicatedAbstractRepository extends MinIoSpecialCo
 
     @Override
     protected String bucketName() {
-        return MinioFileUuidV5IdTranslator.NAMESPACE;
+        return MinioFileUuidV5IdTranslator.NAMESPACE_ID_STR;
     }
 }

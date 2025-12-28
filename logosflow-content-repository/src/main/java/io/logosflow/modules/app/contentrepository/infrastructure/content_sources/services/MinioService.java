@@ -1,5 +1,8 @@
-package io.logosflow.modules.app.contentrepository.infrastructure.contentsource.services;
+package io.logosflow.modules.app.contentrepository.infrastructure.content_sources.services;
 
+import io.logosflow.modules.app.contentrepository.models.content.Content;
+import io.logosflow.modules.app.contentrepository.models.content.ContentId;
+import io.logosflow.modules.app.contentrepository.models.content.StreamingContent;
 import io.minio.ObjectWriteResponse;
 import io.minio.errors.*;
 import org.springframework.core.io.buffer.DataBuffer;
@@ -32,15 +35,23 @@ public interface MinioService {
             InvalidKeyException, InvalidResponseException, XmlParserException, InternalException;
 
     //ContentMetaInfoConstants.USED_DEFAULT_MEDIA_TYPE_VALUE
-    Mono<String> streamingUpload(String bucketName,
-                                 String resourceUriToSave,
-                                 Flux<DataBuffer> dataBufferFlux,
-                                 String mediaType);
+    Mono<ObjectWriteResponse> streamingUpload(String bucketName,
+                                              String resourceUriToSave,
+                                              Supplier<Flux<DataBuffer>> dataBufferFlux,
+                                              String mediaType,
+                                              Map<String, String> metaInfo
+    );
 
-//    Optional<Content> find(Content.Id contentId);
+    Optional<Content> find(ContentId contentId);
 
-    Optional<String> isExists(String bucketName, String resourceUriToSave)
+    Optional<String> chekExistingContent(String bucketName, String resourceUriToSave)
             throws ServerException, InsufficientDataException, ErrorResponseException, IOException,
             NoSuchAlgorithmException, InvalidKeyException, InvalidResponseException, XmlParserException,
             InternalException;
+
+    Optional<Content> findBy(String bucketName, String resourceIdStr);
+
+    Optional<StreamingContent> findAsyncBy(ContentId contentId);
+
+    Mono<StreamingContent> findAsynchronouslyBy(String bucketName, String resourceIdStr);
 }

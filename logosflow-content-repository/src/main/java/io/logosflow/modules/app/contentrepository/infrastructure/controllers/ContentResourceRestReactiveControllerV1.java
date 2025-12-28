@@ -6,9 +6,12 @@ import io.logosflow.modules.app.contentrepository.infrastructure.content_sources
 import io.logosflow.modules.app.contentrepository.models.content.StreamingContent;
 import io.logosflow.modules.app.contentrepository.resources.AllContentsRepositoryFacade;
 import io.logosflow.modules.app.contentrepository.resources.ResourceSimulationRepository;
+import lombok.Builder;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +34,6 @@ import static java.util.Collections.emptyMap;
 public class ContentResourceRestReactiveControllerV1 {
 
     public static final String API_VERSION_PREFIX = "/api/v1/reactive/content";
-
     public static final String BASE_URL = API_VERSION_PREFIX + "/repositories/content/resources";
 
     private final ResourceSimulationRepository resourceSimulationRepository;
@@ -42,7 +44,6 @@ public class ContentResourceRestReactiveControllerV1 {
     public CompletableFuture<String> ping(@RequestParam String requestId, @RequestParam Long timing) {
         var resource = resourceSimulationRepository.getResourceByTiming(requestId, timing);
         log.info(resource);
-
         return CompletableFuture.completedFuture(resource);
     }
 
@@ -50,7 +51,6 @@ public class ContentResourceRestReactiveControllerV1 {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.TEXT_PLAIN_VALUE)
     public Mono<ResponseEntity<String>> uploadFile(@RequestPart("file") Mono<FilePart> filePartMono) {
-
         return filePartMono.flatMap(file -> {
             log.info("Uploading file: {}", file.filename());
 
@@ -70,8 +70,8 @@ public class ContentResourceRestReactiveControllerV1 {
                             .body(resourceId))
                     .onErrorResume(e -> {
                         log.error("Error during file upload: {}", e.getMessage(), e);
-
-                        return Mono.just(ResponseEntity.internalServerError().body("Upload failed: " + e.getMessage()));
+                        return Mono.just(ResponseEntity.internalServerError()
+                                .body("Upload failed: " + e.getMessage()));
                     });
         });
     }
@@ -90,7 +90,7 @@ public class ContentResourceRestReactiveControllerV1 {
 
         StreamingContent content = contentAdapter.contentFrom(contentSource);
 
-        allContentsRepositoryFacade
+        return allContentsRepositoryFacade
                 .save(content)
                 .map(resourceId -> ResponseEntity
                         .status(HttpStatus.CREATED)
@@ -98,19 +98,102 @@ public class ContentResourceRestReactiveControllerV1 {
                         .body(resourceId))
                 .onErrorResume(e -> {
                     log.error("Error during byte-stream upload: {}", e.getMessage(), e);
-
-                    return Mono.just(ResponseEntity.internalServerError().body("Upload failed: " + e.getMessage()));
+                    return Mono.just(ResponseEntity.internalServerError()
+                            .body("Upload failed: " + e.getMessage()));
                 });
+    }
 
-        return Mono.fromRunnable(() -> ResponseEntity
-                .status(HttpStatus.CREATED)
-                .contentType(MediaType.TEXT_PLAIN)
-                .body(allContentsRepositoryFacade.save(content)
-                ));
+    /**
+     * Endpoint to retrieve streaming content by resource ID.
+     */
+    @GetMapping(value = "/resource/{resourceId}/stream", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    public Mono<ResponseEntity<Flux<DataBuffer>>> getContentStream(@PathVariable UUID resourceId) {
+        log.debug("Retrieving streaming content for resourceId: {}", resourceId);
+
+        return allContentsRepositoryFacade.findAsynchronously(resourceId)
+                .map(content -> {
+                    try {
+                        HttpHeaders headers = buildStreamingHeaders(content);
+                        return ResponseEntity.ok()
+                                .headers(headers)
+                                .contentType(content.getMediaType())
+                                .body(content.getDataSupplier().get());
+                    } catch (Exception e) {
+                        log.error("Error retrieving streaming content for resourceId: {}", resourceId, e);
+                        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).<Flux<DataBuffer>>build();
+                    }
+                })
+                .switchIfEmpty(Mono.fromCallable(() -> {
+                    log.debug("Streaming content not found for resourceId: {}", resourceId);
+                    return ResponseEntity.notFound().<Flux<DataBuffer>>build();
+                }))
+                .onErrorResume(e -> {
+                    log.error("Error during streaming content retrieval for resourceId: {}", resourceId, e);
+                    return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+                });
+    }
+
+    private HttpHeaders buildStreamingHeaders(StreamingContent content) {
+        HttpHeaders headers = new HttpHeaders();
+        content.getDataSizeInBytes().ifPresent(headers::setContentLength);
+
+        // Add cache control headers
+        headers.setCacheControl("public, max-age=3600");
+
+        // Add content disposition for file downloads
+        String filename = extractFilenameFromMetadata(content);
+        if (filename != null) {
+            headers.setContentDispositionFormData("attachment", filename);
+        }
+
+        return headers;
+    }
+
+    private String extractFilenameFromMetadata(StreamingContent content) {
+        return content.getMetaInfo().get("filename");
+    }
+
+    /**
+     * Endpoint to get streaming content metadata by resource ID.
+     */
+    @GetMapping("/resource/{resourceId}/metadata")
+    public Mono<ResponseEntity<StreamingContentMetadataResponse>> getContentMetadata(@PathVariable UUID resourceId) {
+        log.debug("Retrieving streaming metadata for resourceId: {}", resourceId);
+
+        return allContentsRepositoryFacade.findAsynchronously(resourceId)
+                .map(content -> {
+                    StreamingContentMetadataResponse metadata = StreamingContentMetadataResponse.builder()
+                            .resourceId(resourceId)
+                            .mediaType(content.getMediaType().toString())
+                            .sizeInBytes(content.getDataSizeInBytes().orElse(null))
+                            .metaInfo(content.getMetaInfo())
+                            .contentUri(content.getId().uri().toString())
+                            .build();
+                    return ResponseEntity.ok(metadata);
+                })
+                .switchIfEmpty(Mono.fromCallable(() -> {
+                    log.debug("Streaming content not found for resourceId: {}", resourceId);
+                    return ResponseEntity.notFound().<StreamingContentMetadataResponse>build();
+                }))
+                .onErrorResume(e -> {
+                    log.error("Error during streaming content metadata retrieval for resourceId: {}", resourceId, e);
+                    return Mono.just(ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build());
+                });
     }
 
     @GetMapping("/resource/is-exist/{resourceId}")
     public Mono<Boolean> isExist(@PathVariable(value = "resourceId") UUID resourceId) {
         return allContentsRepositoryFacade.checkExistingContentAsynchronously(resourceId).hasElement();
+    }
+
+    // Helper class for metadata response
+    @Builder
+    @Data
+    public static class StreamingContentMetadataResponse {
+        private UUID resourceId;
+        private String mediaType;
+        private Long sizeInBytes;
+        private java.util.Map<String, String> metaInfo;
+        private String contentUri;
     }
 }
