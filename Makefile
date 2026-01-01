@@ -1,58 +1,79 @@
-include .env
-include make-tasks/Makefile.*
+# Makefile
+# This file provides a centralized command interface for managing the project's Docker stacks.
 
-# Do NOT include the sub-makefiles; we’ll call them with -C
-# (Leave Maven include out as well unless you really need its vars)
-
+SHELL := /bin/bash
 .DEFAULT_GOAL := help
 
+# Combine all compose files for full-stack operations.
+COMPOSE_ALL   := -f docker-compose.infra.yml -f docker-compose.llm.yml -f docker-compose.ui.yml
+
 .PHONY: help
-help:
-	@echo "Available targets:"
-	@$(MAKE) -C make-tasks -f Makefile.docker help
-	@echo "---"
-	@if [ -f make-tasks/Makefile.maven ]; then \
-	  $(MAKE) -C make-tasks -f Makefile.maven help; \
-	else \
-	  echo "(make-tasks/Makefile.maven not found — skipping)"; \
-	fi
+help: ## ✨ Show this help message
+	@echo "Usage: make [command]"
+	@echo ""
+	@echo "Full Stack Management:"
+	@grep -E '^[a-zA-Z0-9_-]+:.*?##' $(MAKEFILE_LIST) | grep -E '🚀|🛑|🔄|📜|📊' | sed -e 's/:.*##/:/' | column -t -s':'
+	@echo ""
+	@echo "Individual Stack Commands:"
+	@echo "  infra-up, infra-down, infra-logs"
+	@echo "  llm-up,   llm-down,   llm-logs"
+	@echo "  ui-up,    ui-down,    ui-logs"
+	@echo ""
+	@echo "Status & Cleanup:"
+	@grep -E '^[a-zA-Z0-9_-]+:.*?##' $(MAKEFILE_LIST) | grep -E '📈|🧹' | sed -e 's/:.*##/:/' | column -t -s':'
 
-# LLM wrappers (no collisions now)
-.PHONY: llm-start llm-stop llm-restart llm-status llm-logs
-llm-start:      ; $(MAKE) -C make-tasks -f Makefile.llm llm-start
-llm-stop:       ; $(MAKE) -C make-tasks -f Makefile.llm llm-stop
-llm-restart:    ; $(MAKE) -C make-tasks -f Makefile.llm llm-restart
-llm-status:     ; $(MAKE) -C make-tasks -f Makefile.llm llm-status
-llm-logs:       ; $(MAKE) -C make-tasks -f Makefile.llm llm-logs
+# --- Full Stack Management ---
+.PHONY: up down restart logs ps
+up: ## 🚀 Start all services (infra, llm, ui)
+	@echo "Starting all services..."
+	@docker compose $(COMPOSE_ALL) up -d --build
 
-# Docker/MCPO wrappers
-.PHONY: llm-mcpo-build llm-mcpo-up llm-mcpo-down llm-mcpo-logs curl-health curl-scrape curl-mcp-schema curl-mcp-sse clean-all
-llm-mcpo-build: ; $(MAKE) -C make-tasks -f Makefile.docker llm-mcpo-build
-llm-mcpo-up:    ; $(MAKE) -C make-tasks -f Makefile.docker llm-mcpo-up
-llm-mcpo-down:  ; $(MAKE) -C make-tasks -f Makefile.docker llm-mcpo-down
-llm-mcpo-logs:  ; $(MAKE) -C make-tasks -f Makefile.docker llm-mcpo-logs
+down: ## 🛑 Stop all services
+	@echo "Stopping all services..."
+	@docker compose $(COMPOSE_ALL) down
 
-curl-health: ; $(MAKE) -C make-tasks -f Makefile.docker curl-health
-curl-mcpo-openapi:    ; $(MAKE) -C make-tasks -f Makefile.docker curl-mcpo-openapi
-curl-mcpo-docs:  ; $(MAKE) -C make-tasks -f Makefile.docker curl-mcpo-docs
-curl-crawl4ai-openapi:  ; $(MAKE) -C make-tasks -f Makefile.docker curl-crawl4ai-openapi
-curl-crawl4ai-docs:  ; $(MAKE) -C make-tasks -f Makefile.docker curl-crawl4ai-docs
-curl-scrape:  ; $(MAKE) -C make-tasks -f Makefile.docker curl-scrape
+restart: ## 🔄 Restart all services
+	$(MAKE) down
+	$(MAKE) up
 
-clean-all:  ; $(MAKE) -C make-tasks -f Makefile.docker clean-all
+logs: ## 📜 View logs for all services
+	@docker compose $(COMPOSE_ALL) logs -f
 
+ps: ## 📊 Show status of all running containers
+	@docker compose $(COMPOSE_ALL) ps
 
-# switch-qwen-coder: ; $(MAKE) -f make-tasks/Makefile.llm switch-qwen-coder
-# switch-deepseek-qwen3: ; $(MAKE) -f make-tasks/Makefile.llm switch-deepseek-qwen3
-# switch-qwen3-4b: ; $(MAKE) -f make-tasks/Makefile.llm switch-qwen3-4b
-# switch-qwen3-8b: ; $(MAKE) -f make-tasks/Makefile.llm switch-qwen3-8b
-# switch-mistral-7b: ; $(MAKE) -f make-tasks/Makefile.llm switch-mistral-7b
-# unload-models:    ; $(MAKE) -f make-tasks/Makefile.llm unload-models
+# --- Individual Stack Management ---
+.PHONY: infra-up infra-down infra-logs llm-up llm-down llm-logs ui-up ui-down ui-logs
 
-# llm-test-qwen-coder: ; $(MAKE) -f make-tasks/Makefile.llm test-qwen-coder
-# llm-test-deepseek-qwen3: ; $(MAKE) -f make-tasks/Makefile.llm test-deepseek-qwen3
-# llm-test-qwen3-4b: ; $(MAKE) -f make-tasks/Makefile.llm test-qwen3-4b
-# llm-test-qwen3-8b: ; $(MAKE) -f make-tasks/Makefile.llm test-qwen3-8b
-# llm-test-mistral-7b: ; $(MAKE) -f make-tasks/Makefile.llm test-mistral-7b
+infra-up: ; $(MAKE) -C make-tasks -f Makefile.infra infra-up
+infra-down: ; $(MAKE) -C make-tasks -f Makefile.infra infra-down
+infra-logs: ; $(MAKE) -C make-tasks -f Makefile.infra infra-logs
 
+llm-up: ; $(MAKE) -C make-tasks -f Makefile.llm llm-up
+llm-down: ; $(MAKE) -C make-tasks -f Makefile.llm llm-down
+llm-logs: ; $(MAKE) -C make-tasks -f Makefile.llm llm-logs
 
+ui-up: ; $(MAKE) -C make-tasks -f Makefile.ui ui-up
+ui-down: ; $(MAKE) -C make-tasks -f Makefile.ui ui-down
+ui-logs: ; $(MAKE) -C make-tasks -f Makefile.ui ui-logs
+
+# --- Java Build Management ---
+.PHONY: mvn-rebuild-all
+mvn-rebuild-all: ## ☕ Rebuild all Java applications
+	@$(MAKE) -C make-tasks -f Makefile.maven mvn/rebuild-all
+
+# --- Status & Cleanup ---
+.PHONY: status clean
+status: ## 📈 Show status of LLM services and available models
+	@echo "==> Running Containers:"
+	@docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+	@echo "\n==> LiteLLM Models (http://localhost:4000):"
+	@curl -s http://localhost:4000/v1/models | jq -r '.data[].id' || echo "LiteLLM not responding."
+	@echo "\n==> Ollama Models (http://localhost:11434):"
+	@curl -s http://localhost:11434/api/tags | jq -r '.models[].name' || echo "Ollama not responding."
+
+clean: down ## 🧹 Stop all services and prune Docker system
+	@echo "Cleaning up Docker system..."
+	docker system prune -af
+	@echo "Removing Docker volumes..."
+	docker volume rm logosflow_llm_models logosflow_litellm_data logosflow_openwebui_data || true

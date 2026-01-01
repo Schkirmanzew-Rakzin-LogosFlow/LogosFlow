@@ -1,84 +1,97 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/sh
+set -eu
 
-: "${OLLAMA_HOST:=http://ollama_server:11434}"
+MODELS_DIR="${MODELS_DIR:-/root/modelslinks}"
 
-# Install CLI + system tools we use
-apt-get update -qq
-apt-get install -y -qq jq curl >/dev/null 2>&1
+# Defaults for context sizes and other parameters, configurable via environment variables.
+DEFAULT_CTX="${DEFAULT_CTX:-4096}"
+EXTRA_CTX_LIST="${EXTRA_CTX_LIST:-8192}"
+VL_CTX="${VL_CTX:-4096}"
+DEFAULT_TEMPERATURE="${DEFAULT_TEMPERATURE:-0.7}"
+NUM_THREAD="${NUM_THREAD:-}"
 
-echo "==> Pulling models from Ollama registry..."
+# Wait until the Ollama server is responsive.
+echo "[model_prep] waiting for Ollama at ${OLLAMA_HOST:-<not set>} ..."
+i=0
+until ollama list >/dev/null 2>&1; do
+  i=$((i+1))
+  if [ "$i" -gt 60 ]; then
+    echo "[model_prep] ERROR: Ollama not reachable after 60 attempts"
+    exit 1
+  fi
+  sleep 2
+done
+echo "[model_prep] Ollama is reachable."
 
-# Function to pull models with retry
-pull_model_with_retry() {
-    local model_name="$1"
-    local max_attempts=3
-    local attempt=1
-    
-    echo "Pulling model: $model_name"
-    
-    while [ $attempt -le $max_attempts ]; do
-        echo "Attempt $attempt/$max_attempts..."
-        
-        if curl -fsS -X POST "${OLLAMA_HOST}/api/pull" \
-            -H "Content-Type: application/json" \
-            -d "{\"name\":\"${model_name}\"}"; then
-            echo "Pull successful!"
-            return 0
-        else
-            echo "Pull attempt $attempt failed"
-            if [ $attempt -lt $max_attempts ]; then
-                echo "Retrying in 10 seconds..."
-                sleep 10
-            fi
-        fi
-        
-        attempt=$((attempt + 1))
+# Sanitize the model name to be compliant with Ollama's naming conventions.
+sanitize_name() {
+  echo "$1" | tr '[:upper:]' '[:lower:]' | sed -E 's/[^a-z0-9._-]+/-/g; s/^-+//; s/-+$//'
+}
+
+# Determine the appropriate context size for a given model file.
+ctx_for_file() {
+  f="$1"
+  low="$(echo "$f" | tr '[:upper:]' '[:lower:]')"
+  if echo "$low" | grep -Eq '(^|[^a-z])vl([^a-z]|$)|vision'; then
+    echo "$VL_CTX"
+  else
+    echo "$DEFAULT_CTX"
+  fi
+}
+
+# Create a model in Ollama from a GGUF file with a specific context size.
+create_model() {
+  model_tag="$1"
+  gguf_path="$2"
+  ctx="$3"
+
+  if ollama show "$model_tag" >/dev/null 2>&1; then
+    echo "[model_prep] exists: $model_tag"
+    return 0
+  fi
+
+  tmpfile="/tmp/Modelfile.$$"
+  {
+    echo "FROM $gguf_path"
+    echo "PARAMETER num_ctx $ctx"
+    echo "PARAMETER temperature $DEFAULT_TEMPERATURE"
+    if [ -n "$NUM_THREAD" ]; then
+      echo "PARAMETER num_thread $NUM_THREAD"
+    fi
+  } > "$tmpfile"
+
+  echo "[model_prep] creating: $model_tag (ctx=$ctx) from $gguf_path"
+  ollama create "$model_tag" -f "$tmpfile"
+  rm -f "$tmpfile"
+}
+
+# Main loop to process all .gguf files in the models directory.
+found=0
+for f in "$MODELS_DIR"/*.gguf; do
+  if [ ! -f "$f" ]; then
+    continue
+  fi
+  found=1
+
+  base="$(basename "$f" .gguf)"
+  name="$(sanitize_name "$base")"
+
+  ctx_main="$(ctx_for_file "$base")"
+  create_model "${name}:ctx${ctx_main}" "$f" "$ctx_main"
+
+  if [ -n "$EXTRA_CTX_LIST" ]; then
+    for extra in $EXTRA_CTX_LIST; do
+      if [ "$extra" = "$ctx_main" ]; then
+        continue
+      fi
+      create_model "${name}:ctx${extra}" "$f" "$extra"
     done
-    
-    echo "All pull attempts failed for $model_name"
-    return 1
-}
+  fi
 
-# Pull the exact models from Ollama registry
-echo "==> Pulling Qwen2.5-Coder 7B Q4_K_M..."
-pull_model_with_retry "qwen2.5-coder:7b-instruct-q4_K_M" || true
+done
 
-echo "==> Pulling DeepSeek R1 0528 Qwen3 8B Q4_K_M..."
-pull_model_with_retry "deepseek/deepseek-r1-0528-qwen3-8b:q4_K_M" || true
+if [ "$found" -eq 0 ]; then
+  echo "[model_prep] WARNING: no *.gguf found in $MODELS_DIR"
+fi
 
-echo "==> Pulling Qwen3 4B 2507 Q4_K_M..."
-pull_model_with_retry "qwen/qwen3-4b-2507:q4_K_M" || true
-
-echo "==> Pulling Qwen3 8B Q4_K_M..."
-pull_model_with_retry "qwen/qwen3-8b:q4_K_M" || true
-
-echo "==> Pulling Mistral 7B Instruct v0.3 Q4_K_M..."
-pull_model_with_retry "mistralai/mistral-7b-instruct-v0.3:q4_K_M" || true
-
-# Wait a bit for models to be available
-sleep 5
-
-# Create aliases with our expected names
-create_alias() {
-    local source_model="$1"
-    local alias_name="$2"
-    echo "==> Creating alias: $alias_name -> $source_model"
-    
-    # Create a simple Modelfile that references the source model
-    local modelfile_content="FROM $source_model"
-    
-    curl -fsS -X POST "${OLLAMA_HOST}/api/create" \
-        -H "Content-Type: application/json" \
-        -d "{\"name\":\"${alias_name}\",\"modelfile\":\"${modelfile_content}\"}"
-    echo ""
-}
-
-# Create our expected model names as aliases
-create_alias "qwen2.5-coder:7b-instruct-q4_K_M" "qwen-coder-7b"
-create_alias "deepseek/deepseek-r1-0528-qwen3-8b:q4_K_M" "deepseek-qwen3-8b"
-create_alias "qwen/qwen3-4b-2507:q4_K_M" "qwen3-4b"
-create_alias "qwen/qwen3-8b:q4_K_M" "qwen3-8b"
-create_alias "mistralai/mistral-7b-instruct-v0.3:q4_K_M" "mistral-7b"
-
-echo "==> Model init completed."
+echo "[model_prep] done."

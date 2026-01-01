@@ -1,0 +1,15 @@
+# make-tasks/Makefile.infra
+
+SHELL := /bin/bash
+COMPOSE_INFRA := -f ../docker-compose.infra.yml
+
+.PHONY: infra-up infra-down infra-logs
+
+infra-up: ## 🔑 Start the infrastructure stack (Keycloak)
+	@docker compose $(COMPOSE_INFRA) up -d
+
+infra-down: ## 🔑 Stop the infrastructure stack
+	@docker compose $(COMPOSE_INFRA) down
+
+infra-logs: ## 🔑 View logs for the infrastructure stack
+	@docker compose $(COMPOSE_INFRA) logs -f

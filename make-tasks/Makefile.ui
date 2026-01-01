@@ -1,0 +1,15 @@
+# make-tasks/Makefile.ui
+
+SHELL := /bin/bash
+COMPOSE_UI := -f ../docker-compose.ui.yml
+
+.PHONY: ui-up ui-down ui-logs
+
+ui-up: ## 🎨 Start the UI stack (Traefik, OpenWebUI)
+	@docker compose $(COMPOSE_UI) up -d
+
+ui-down: ## 🎨 Stop the UI stack
+	@docker compose $(COMPOSE_UI) down
+
+ui-logs: ## 🎨 View logs for the UI stack
+	@docker compose $(COMPOSE_UI) logs -f

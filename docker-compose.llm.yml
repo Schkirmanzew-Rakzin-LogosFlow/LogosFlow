@@ -1,0 +1,157 @@
+# docker-compose.llm.yml
+
+name: logosflow-llm-stack
+
+networks:
+  logosflow_net:
+    driver: bridge
+    name: logosflow_net
+
+volumes:
+  llm-models:
+    name: logosflow_llm_models
+  litellm-data:
+    name: logosflow_litellm_data
+
+services:
+  ollama_server:
+    image: ollama/ollama:0.13.5
+    container_name: ollama_server
+    restart: unless-stopped
+    devices:
+      - /dev/dri:/dev/dri
+      - /dev/kfd:/dev/kfd
+    group_add:
+      - "video"
+      - "render"
+    volumes:
+      - llm-models:/root/.ollama
+      - ./docker/llm/modelslinks:/root/modelslinks:ro
+      - ./docker/llm/scripts/health_check.py:/usr/local/bin/health_check.py:ro
+    ports:
+      - "11434:11434"
+    environment:
+      - OLLAMA_HOST=0.0.0.0:11434
+      # AMD Vulkan Configuration
+      - OLLAMA_VULKAN=1
+      - GGML_VK_VISIBLE_DEVICES=0
+      # Resource Control
+      - OLLAMA_NUM_PARALLEL=1
+      - OLLAMA_MAX_LOADED_MODELS=1
+    healthcheck:
+      test: ["CMD", "python3", "/usr/local/bin/health_check.py"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  model_prep:
+    image: ollama/ollama:0.13.5
+    container_name: model_prep
+    restart: "no"
+    environment:
+      - OLLAMA_HOST=http://ollama_server:11434
+      # Context window sizes for model tag generation
+      - DEFAULT_CTX=4096
+      - VL_CTX=4096
+      - EXTRA_CTX_LIST=8192
+    volumes:
+      - ./docker/llm/scripts:/scripts:ro
+      - ./docker/llm/modelslinks:/root/modelslinks:ro
+      - llm-models:/root/.ollama
+    depends_on:
+      ollama_server:
+        condition: service_healthy
+    command: ["/bin/sh", "/scripts/init-models.sh"]
+    networks:
+      - logosflow_net
+
+  litellm_proxy:
+    image: ghcr.io/berriai/litellm:v1.40.10
+    container_name: litellm_proxy
+    restart: unless-stopped
+    environment:
+      - LITELLM_MASTER_KEY=sk-logosflow-local
+      - LITELLM_CONFIG_PATH=/app/config.yml
+    ports:
+      # Expose for direct access and testing
+      - "4000:4000"
+    volumes:
+      - ./docker/llm/litellm.yml:/app/config.yml:ro
+      - litellm-data:/app/db
+    depends_on:
+      ollama_server:
+        condition: service_healthy
+    networks:
+      - logosflow_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.litellm.rule=PathPrefix(`/litellm`)"
+      - "traefik.http.routers.litellm.entrypoints=web"
+      - "traefik.http.services.litellm.loadbalancer.server.port=4000"
+
+  mcpo:
+    image: ghcr.io/open-webui/mcpo:main # Using main as no specific version tags are available
+    container_name: mcpo
+    restart: unless-stopped
+    command: ["mcpo", "--config", "/app/config/config.json", "--server-type", "remote"]
+    volumes:
+      - ./docker/llm/mcpo/config:/app/config:ro
+    networks:
+      - logosflow_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=logosflow_net"
+      - "traefik.http.middlewares.mcpo-strip.stripprefix.prefixes=/mcpo"
+      - "traefik.http.routers.mcpo.rule=PathPrefix(`/mcpo`)"
+      - "traefik.http.routers.mcpo.entrypoints=web"
+      - "traefik.http.services.mcpo.loadbalancer.server.port=8000"
+
+  crawl4ai:
+    image: unclecode/crawl4ai:0.4.0
+    container_name: crawl4ai
+    restart: unless-stopped
+    shm_size: "1g"
+    expose:
+      - "11235"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - LOG_LEVEL=INFO
+      - DISABLE_REDIS=1
+    networks:
+      - logosflow_net
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=logosflow_net"
+      - "traefik.http.services.c4ai_svc.loadbalancer.server.port=11235"
+      # Route /mcpo/crawl4ai to the crawl4ai service
+      - "traefik.http.middlewares.c4ai-strip.stripprefix.prefixes=/mcpo/crawl4ai"
+      - "traefik.http.routers.c4ai.rule=PathPrefix(`/mcpo/crawl4ai`)"
+      - "traefik.http.routers.c4ai.entrypoints=web"
+      - "traefik.http.routers.c4ai.middlewares=c4ai-strip@docker"
+      - "traefik.http.routers.c4ai.service=c4ai_svc"
+
+  # web-scraper:
+  #   build:
+  #     context: ./mcpo/services/web-scraper
+  #   container_name: web-scraper
+  #   restart: unless-stopped
+  #   environment:
+  #     PYTHONUNBUFFERED: "1"
+  #     UVICORN_WORKERS: "2"
+  #     SCRAPER_MAX_HTML_CHARS: "500000"
+  #   expose:
+  #     - "8000"
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-fsS", "http://localhost:8000/health"]
+  #     interval: 20s
+  #     timeout: 5s
+  #     retries: 5
+  #   networks:
+  #     - logosflow_net
+  #   labels:
+  #     - "traefik.enable=true"
+  #     - "traefik.http.routers.scraper.rule=PathPrefix(`/api/v1/scrape`)"
+  #     - "traefik.http.routers.scraper.entrypoints=web"
+  #     - "traefik.http.routers.scraper.priority=10"
+  #     - "traefik.http.services.scraper.loadbalancer.server.port=8000"

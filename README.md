@@ -8,26 +8,53 @@ To install Java applications (in project directory) run command:
 make mvn/rebuild-all
 ```
 
-## Deployment (Docker)
+## Local Development (Docker)
 
-### Local
+The local environment is managed via `make` and is split into three Docker Compose stacks:
+- **Infrastructure (`infra`)**: Contains core services like Keycloak and its database.
+- **LLM Services (`llm`)**: Contains the AI backend, including Ollama, LiteLLM, MCPO, and related tools.
+- **UI Services (`ui`)**: Contains the user-facing components, including OpenWebUI and the Traefik reverse proxy.
 
-To allow your browser to find the local services, you need to add entries to your `/etc/hosts` file (or `C:\Windows\System32\drivers\etc\hosts` on Windows).
-```shell
-# Add the following line if it's not already there:
-127.0.0.1 cody.local.dev
-```
-## Start the project containers:
-- Run docker-compose:
-```shell
-docker-compose up --build --force-recreate
-```
+### Prerequisites
 
-## Stop the project containers:
-- Run docker-compose:
+- Docker and Docker Compose
+- `make`
+
+### Quick Start
+
+To start the entire application stack (infra, llm, and ui), run:
 ```shell
-docker-compose down
+make up
 ```
+This will build the necessary images and start all services in the background. The first time you run this, the `model_prep` service will download the required LLM models, which may take some time.
+
+### Available Commands
+
+The main `Makefile` provides a set of commands to manage the environment. Run `make help` to see all available commands.
+
+#### Full Stack Management
+- `make up`: Start all services.
+- `make down`: Stop all services.
+- `make restart`: Restart all services.
+- `make logs`: View logs for all services.
+- `make ps`: Show the status of all running containers.
+
+#### Individual Stack Management
+- `make infra-up`, `make infra-down`, `make infra-logs`
+- `make llm-up`, `make llm-down`, `make llm-logs`
+- `make ui-up`, `make ui-down`, `make ui-logs`
+
+#### Status & Cleanup
+- `make status`: Show the status of running containers and the models available in LiteLLM and Ollama.
+- `make clean`: Stop all services, prune the Docker system, and remove project-specific Docker volumes.
+
+### Accessing Services
+
+- **OpenWebUI**: [http://localhost:3000](http://localhost:3000)
+- **Traefik Dashboard**: [http://localhost:8080](http://localhost:8080)
+- **LiteLLM API**: [http://localhost:4000](http://localhost:4000)
+- **Ollama API**: [http://localhost:11434](http://localhost:11434)
+- **Keycloak Admin Console**: [http://localhost:49088/admin/](http://localhost:49088/admin/)
 
 ## Start Java applications:
 

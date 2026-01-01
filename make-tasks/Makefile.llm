@@ -1,89 +1,15 @@
-# ===== make-tasks/Makefile.llm =====
+# make-tasks/Makefile.llm
+
 SHELL := /bin/bash
-# Compose files: root + LLM override
-COMPOSE_FILES := -f docker-compose.yaml -f docker/llm/docker-compose.llm.override.yml
-PORT ?= 11434
-DEFAULT_MODEL ?= qwen-coder-7b
+COMPOSE_LLM := -f ../docker-compose.llm.yml
 
-# Helper to run compose with both files
-dc = docker compose $(COMPOSE_FILES)
+.PHONY: llm-up llm-down llm-logs
 
-.PHONY: llm-start llm-stop llm-restart llm-status llm-logs llm-ps
+llm-up: ## 🧠 Start the LLM stack (Ollama, LiteLLM, MCPO)
+	@docker compose $(COMPOSE_LLM) up -d --build
 
-llm-start:
-	$(dc) up -d
-	@echo "Waiting for model_prep to complete (first run downloads models)…"
-	-@$(dc) wait model_prep >/dev/null 2>&1 || true
-	@$(MAKE) warm-$(DEFAULT_MODEL)
+llm-down: ## 🧠 Stop the LLM stack
+	@docker compose $(COMPOSE_LLM) down
 
-llm-stop:
-	$(dc) down
-
-llm-restart:
-	$(MAKE) llm-stop
-	$(MAKE) llm-start
-
-llm-ps:
-	docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
-
-llm-logs:
-	$(dc) logs -f --tail=200
-
-llm-status:
-	@echo "==> Running containers:"
-	@docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
-	@echo ""
-	@echo "==> Ollama models:"
-	@curl -sf http://localhost:$(PORT)/api/tags | jq '.' || true
-
-# --------- warmers / switchers ----------
-.PHONY: warm-% switch-qwen-coder switch-deepseek-qwen3 switch-qwen3-4b switch-qwen3-8b switch-mistral-7b unload-models
-
-warm-%:
-	@echo "Warming model $* ..."
-	@curl -sf -X POST http://localhost:$(PORT)/v1/chat/completions \
-		-H "Content-Type: application/json" \
-		-d '{"model":"$*","messages":[{"role":"user","content":"ready?"}],"max_tokens":4}' >/dev/null || true
-
-switch-qwen-coder:
-	@$(MAKE) warm-qwen-coder-7b
-
-switch-deepseek-qwen3:
-	@$(MAKE) warm-deepseek-qwen3-8b
-
-switch-qwen3-4b:
-	@$(MAKE) warm-qwen3-4b
-
-switch-qwen3-8b:
-	@$(MAKE) warm-qwen3-8b
-
-switch-mistral-7b:
-	@$(MAKE) warm-mistral-7b
-
-unload-models:
-	@echo "Stopping all models in Ollama…"
-	@docker compose -f docker-compose.yaml -f docker/llm/docker-compose.llm.override.yml exec -T ollama_server \
-	  bash -lc 'ollama ps --format json | jq -r ".models[].name" | xargs -r -n1 ollama stop' || true
-
-# --------- quick tests ----------
-.PHONY: test-qwen-coder test-deepseek-qwen3 test-qwen3-4b test-qwen3-8b test-mistral-7b
-
-test-qwen-coder:
-	curl -s http://localhost:$(PORT)/v1/chat/completions -H "Content-Type: application/json" \
-	  -d '{"model":"qwen-coder-7b","messages":[{"role":"user","content":"Write a C++ function to reverse a string."}],"max_tokens":64}' | jq .
-
-test-deepseek-qwen3:
-	curl -s http://localhost:$(PORT)/v1/chat/completions -H "Content-Type: application/json" \
-	  -d '{"model":"deepseek-qwen3-8b","messages":[{"role":"user","content":"Write a Python function to sort a list."}],"max_tokens":64}' | jq .
-
-test-qwen3-4b:
-	curl -s http://localhost:$(PORT)/v1/chat/completions -H "Content-Type: application/json" \
-	  -d '{"model":"qwen3-4b","messages":[{"role":"user","content":"What are the SOLID principles?"}],"max_tokens":64}' | jq .
-
-test-qwen3-8b:
-	curl -s http://localhost:$(PORT)/v1/chat/completions -H "Content-Type: application/json" \
-	  -d '{"model":"qwen3-8b","messages":[{"role":"user","content":"Explain dependency injection."}],"max_tokens":64}' | jq .
-
-test-mistral-7b:
-	curl -s http://localhost:$(PORT)/v1/chat/completions -H "Content-Type: application/json" \
-	  -d '{"model":"mistral-7b","messages":[{"role":"user","content":"What is clean architecture?"}],"max_tokens":64}' | jq .
+llm-logs: ## 🧠 View logs for the LLM stack
+	@docker compose $(COMPOSE_LLM) logs -f

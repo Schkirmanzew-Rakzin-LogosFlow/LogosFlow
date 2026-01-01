@@ -1,32 +1,78 @@
-model_list:
-  - model_name: qwen-coder-7b
-    litellm_params:
-      provider: ollama
-      model: qwen-coder-7b
-      base_url: http://ollama_server:11434
-  - model_name: deepseek-qwen3-8b
-    litellm_params:
-      provider: ollama
-      model: deepseek-qwen3-8b
-      base_url: http://ollama_server:11434
-  - model_name: qwen3-4b
-    litellm_params:
-      provider: ollama
-      model: qwen3-4b
-      base_url: http://ollama_server:11434
-  - model_name: qwen3-8b
-    litellm_params:
-      provider: ollama
-      model: qwen3-8b
-      base_url: http://ollama_server:11434
-  - model_name: mistral-7b
-    litellm_params:
-      provider: ollama
-      model: mistral-7b
-      base_url: http://ollama_server:11434
+# litellm.yml
+# This file configures the LiteLLM proxy. It defines the available model tags
+# that clients can request.
+
 router_settings:
-  num_retries: 2
-  timeout: 120
+  num_retries: 3
+  timeout: 600 # Increased timeout for potentially long model responses
 
 general_settings:
   telemetry: false
+
+litellm_settings:
+  # The base URL for the Ollama server that LiteLLM will connect to.
+  ollama: http://ollama_server:11434
+
+model_list:
+  # Set a default model. Assumes a file like 'Qwen3-4B-Q4_K_M.gguf' exists,
+  # which the init script will register as 'qwen3-4b-q4_k_m:ctx4096'.
+  - model_name: default_model
+    litellm_params:
+      model: ollama/qwen3-4b-q4_k_m:ctx4096
+
+  # --- Add entries for each expected model tag ---
+  # The model names here MUST match the tags created by the init-models.sh script.
+  # Format: ollama/sanitized-gguf-filename:ctxSIZE
+
+  # Example for qwen2.5-vl-7b-q4_k_m.gguf
+  - model_name: qwen2.5-vl-7b-q4_k_m:ctx4096
+    litellm_params:
+      model: ollama/qwen2.5-vl-7b-q4_k_m:ctx4096
+
+  # Example for qwen2.5-7b-instruct-q3_k_m.gguf
+  - model_name: qwen2.5-7b-instruct-q3_k_m:ctx4096
+    litellm_params:
+      model: ollama/qwen2.5-7b-instruct-q3_k_m:ctx4096
+  - model_name: qwen2.5-7b-instruct-q3_k_m:ctx8192
+    litellm_params:
+      model: ollama/qwen2.5-7b-instruct-q3_k_m:ctx8192
+
+  # Example for phi-4-mini-reasoning-q4_k_m.gguf
+  - model_name: phi-4-mini-reasoning-q4_k_m:ctx4096
+    litellm_params:
+      model: ollama/phi-4-mini-reasoning-q4_k_m:ctx4096
+  - model_name: phi-4-mini-reasoning-q4_k_m:ctx8192
+    litellm_params:
+      model: ollama/phi-4-mini-reasoning-q4_k_m:ctx8192
+
+  # Example for gemma-2-9b-q4_k_m.gguf
+  - model_name: gemma-2-9b-q4_k_m:ctx4096
+    litellm_params:
+      model: ollama/gemma-2-9b-q4_k_m:ctx4096
+  - model_name: gemma-2-9b-q4_k_m:ctx8192
+    litellm_params:
+      model: ollama/gemma-2-9b-q4_k_m:ctx8192
+
+  # Example for Qwen3-8B-Q4_K_M.gguf
+  - model_name: qwen3-8b-q4_k_m:ctx4096
+    litellm_params:
+      model: ollama/qwen3-8b-q4_k_m:ctx4096
+  - model_name: qwen3-8b-q4_k_m:ctx8192
+    litellm_params:
+      model: ollama/qwen3-8b-q4_k_m:ctx8192
+
+  # Example for Qwen3-4B-Q4_K_M.gguf
+  - model_name: qwen3-4b-q4_k_m:ctx4096
+    litellm_params:
+      model: ollama/qwen3-4b-q4_k_m:ctx4096
+  - model_name: qwen3-4b-q4_k_m:ctx8192
+    litellm_params:
+      model: ollama/qwen3-4b-q4_k_m:ctx8192
+
+  # Example for mistral-7b-instruct-v0.3-q4_k_m.gguf
+  - model_name: mistral-7b-instruct-v0.3-q4_k_m:ctx4096
+    litellm_params:
+      model: ollama/mistral-7b-instruct-v0.3-q4_k_m:ctx4096
+  - model_name: mistral-7b-instruct-v0.3-q4_k_m:ctx8192
+    litellm_params:
+      model: ollama/mistral-7b-instruct-v0.3-q4_k_m:ctx8192

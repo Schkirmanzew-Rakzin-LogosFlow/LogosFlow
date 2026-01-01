@@ -1,3 +1,5 @@
+# make-tasks/Makefile.maven
+
 .PHONY: mvn/rebuild-all
 mvn/rebuild-all:
 	mvn clean install -N && \
