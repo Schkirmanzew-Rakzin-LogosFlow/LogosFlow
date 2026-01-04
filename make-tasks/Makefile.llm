@@ -3,7 +3,7 @@
 SHELL := /bin/bash
 COMPOSE_LLM := -f ../docker-compose.llm.yml
 
-.PHONY: llm-up llm-down llm-logs
+.PHONY: llm-up llm-down llm-logs llm-models llm-stop llm-load llm-unload llm-unload-all
 
 llm-up: ## 🧠 Start the LLM stack (Ollama, LiteLLM, MCPO)
 	@docker compose $(COMPOSE_LLM) up -d --build
@@ -13,3 +13,45 @@ llm-down: ## 🧠 Stop the LLM stack
 
 llm-logs: ## 🧠 View logs for the LLM stack
 	@docker compose $(COMPOSE_LLM) logs -f
+
+llm-models: ## 🧠 List models registered in Ollama
+	@docker exec ollama_server ollama list
+
+llm-stop: ## 🧠 Stop/unload a model: make llm-stop model=<name> (or no model to stop any active ones)
+	@if [ -n "$(model)" ]; then \
+		echo "Stopping model: $(model)"; \
+		docker exec ollama_server ollama stop $(model); \
+	else \
+		if ! docker ps --format '{{.Names}}' | grep -q '^ollama_server$$'; then \
+			echo "ollama_server not running; nothing to stop."; exit 0; \
+		fi; \
+		echo "No model specified; stopping all active models (ollama ps)"; \
+		docker exec ollama_server /bin/sh -c '\
+			models=$$(ollama ps | tail -n +2 | awk '"'"'{print $$1}'"'"'); \
+			if [ -z "$$models" ]; then echo "No active models found."; exit 0; fi; \
+			for m in $$models; do echo "Stopping $$m"; ollama stop "$$m" || true; done'; \
+	fi
+
+llm-load: ## 🧠 Preload a model via Ollama API: make llm-load model=<name>
+	@test -n "$(model)" || { echo "Usage: make llm-load model=<name>"; exit 1; }
+	@curl -s -X POST http://localhost:11434/api/generate -H "Content-Type: application/json" \
+		-d '{"model":"$(model)","prompt":"","stream":false}' >/dev/null && \
+		echo "Requested load for model: $(model)"
+
+llm-unload: ## 🧠 Unload a specific model via Ollama API: make llm-unload model=<name>
+	@test -n "$(model)" || { echo "Usage: make llm-unload model=<name>"; exit 1; }
+	@curl -s -X POST http://localhost:11434/api/unload -H "Content-Type: application/json" \
+		-d '{"model":"$(model)"}' >/dev/null && \
+		echo "Requested unload for model: $(model)"
+
+llm-unload-all: ## 🧠 Unload all active models via Ollama API
+	@if ! docker ps --format '{{.Names}}' | grep -q '^ollama_server$$'; then \
+		echo "ollama_server not running; nothing to unload."; exit 0; \
+	fi
+	@models=$$(docker exec ollama_server /bin/sh -c 'ollama ps | tail -n +2 | awk '"'"'{print $$1}'"'"''); \
+	if [ -z "$$models" ]; then echo "No active models found."; exit 0; fi; \
+	for m in $$models; do \
+		echo "Unloading $$m"; \
+		docker exec ollama_server ollama stop "$$m" || true; \
+		curl -s -X POST http://localhost:11434/api/unload -H "Content-Type: application/json" -d '{"model":"'"$$m"'"}' >/dev/null || true; \
+	done

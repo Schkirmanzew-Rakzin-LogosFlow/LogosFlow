@@ -1,0 +1,7 @@
+# List of GGUF model artifacts to register. One filename per line.
+# Lines starting with # are ignored.
+
+Qwen3-4B-Q4_K_M.gguf
+Qwen3-4B-Thinking-2507-Q4_K_M.gguf
+granite-4.0-h-tiny-Q4_K_M.gguf
+Qwen3-VL-4B-Instruct-Q4_K_M.gguf

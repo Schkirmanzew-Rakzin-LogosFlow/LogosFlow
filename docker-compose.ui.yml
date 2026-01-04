@@ -15,6 +15,9 @@ services:
   traefik:
     image: traefik:v3.1.0
     container_name: traefik_proxy
+    mem_limit: 512m
+    mem_reservation: 256m
+    cpus: "1"
     command:
       - "--api.insecure=true"                 # Enable dashboard (dev only)
       - "--providers.docker=true"
@@ -31,20 +34,26 @@ services:
     restart: unless-stopped
 
   openwebui:
-    image: ghcr.io/open-webui/open-webui:0.2.14
+    image: ghcr.io/open-webui/open-webui:v0.6.42
     container_name: openwebui_server
     restart: unless-stopped
+    mem_limit: 3g
+    mem_reservation: 1g
+    cpus: "4"
     volumes:
       - openwebui-data:/app/backend/data
     ports:
       - "${HTTP_PORT:-3000}:8080"
     environment:
       # Connect to the LiteLLM proxy instead of directly to Ollama
-      - OPENAI_API_BASE_URL=http://litellm_proxy:4000
+      - OPENAI_API_BASE_URL=http://litellm_proxy:4000/v1
       # Use a dummy key as LiteLLM will handle the actual model routing
       - OPENAI_API_KEY=sk-logosflow-local
+      # Direct Ollama API (in-network); host access would be http://localhost:11434
+      - OLLAMA_API_BASE_URL=http://ollama_server:11434
       - WEBUI_SECRET_KEY=${WEBUI_SECRET_KEY:-logosflow-secret-key}
       - ENABLE_RAG_WEB_SEARCH=true
+      - USER_AGENT=OpenWebUI
     depends_on:
       - traefik
     networks:

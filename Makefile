@@ -52,6 +52,11 @@ infra-logs: ; $(MAKE) -C make-tasks -f Makefile.infra infra-logs
 llm-up: ; $(MAKE) -C make-tasks -f Makefile.llm llm-up
 llm-down: ; $(MAKE) -C make-tasks -f Makefile.llm llm-down
 llm-logs: ; $(MAKE) -C make-tasks -f Makefile.llm llm-logs
+llm-models: ; $(MAKE) -C make-tasks -f Makefile.llm llm-models
+llm-stop: ; $(MAKE) -C make-tasks -f Makefile.llm llm-stop
+llm-load: ; $(MAKE) -C make-tasks -f Makefile.llm llm-load
+llm-unload: ; $(MAKE) -C make-tasks -f Makefile.llm llm-unload
+llm-unload-all: ; $(MAKE) -C make-tasks -f Makefile.llm llm-unload-all
 
 ui-up: ; $(MAKE) -C make-tasks -f Makefile.ui ui-up
 ui-down: ; $(MAKE) -C make-tasks -f Makefile.ui ui-down

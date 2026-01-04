@@ -24,44 +24,7 @@ model_list:
   # The model names here MUST match the tags created by the init-models.sh script.
   # Format: ollama/sanitized-gguf-filename:ctxSIZE
 
-  # Example for qwen2.5-vl-7b-q4_k_m.gguf
-  - model_name: qwen2.5-vl-7b-q4_k_m:ctx4096
-    litellm_params:
-      model: ollama/qwen2.5-vl-7b-q4_k_m:ctx4096
-
-  # Example for qwen2.5-7b-instruct-q3_k_m.gguf
-  - model_name: qwen2.5-7b-instruct-q3_k_m:ctx4096
-    litellm_params:
-      model: ollama/qwen2.5-7b-instruct-q3_k_m:ctx4096
-  - model_name: qwen2.5-7b-instruct-q3_k_m:ctx8192
-    litellm_params:
-      model: ollama/qwen2.5-7b-instruct-q3_k_m:ctx8192
-
-  # Example for phi-4-mini-reasoning-q4_k_m.gguf
-  - model_name: phi-4-mini-reasoning-q4_k_m:ctx4096
-    litellm_params:
-      model: ollama/phi-4-mini-reasoning-q4_k_m:ctx4096
-  - model_name: phi-4-mini-reasoning-q4_k_m:ctx8192
-    litellm_params:
-      model: ollama/phi-4-mini-reasoning-q4_k_m:ctx8192
-
-  # Example for gemma-2-9b-q4_k_m.gguf
-  - model_name: gemma-2-9b-q4_k_m:ctx4096
-    litellm_params:
-      model: ollama/gemma-2-9b-q4_k_m:ctx4096
-  - model_name: gemma-2-9b-q4_k_m:ctx8192
-    litellm_params:
-      model: ollama/gemma-2-9b-q4_k_m:ctx8192
-
-  # Example for Qwen3-8B-Q4_K_M.gguf
-  - model_name: qwen3-8b-q4_k_m:ctx4096
-    litellm_params:
-      model: ollama/qwen3-8b-q4_k_m:ctx4096
-  - model_name: qwen3-8b-q4_k_m:ctx8192
-    litellm_params:
-      model: ollama/qwen3-8b-q4_k_m:ctx8192
-
-  # Example for Qwen3-4B-Q4_K_M.gguf
+  # Qwen3 4B (text)
   - model_name: qwen3-4b-q4_k_m:ctx4096
     litellm_params:
       model: ollama/qwen3-4b-q4_k_m:ctx4096
@@ -69,10 +32,18 @@ model_list:
     litellm_params:
       model: ollama/qwen3-4b-q4_k_m:ctx8192
 
-  # Example for mistral-7b-instruct-v0.3-q4_k_m.gguf
-  - model_name: mistral-7b-instruct-v0.3-q4_k_m:ctx4096
+  # Granite 4.0 Hybrid Tiny (7B)
+  - model_name: granite-4.0-h-tiny-q4_k_m:ctx4096
     litellm_params:
-      model: ollama/mistral-7b-instruct-v0.3-q4_k_m:ctx4096
-  - model_name: mistral-7b-instruct-v0.3-q4_k_m:ctx8192
+      model: ollama/granite-4.0-h-tiny-q4_k_m:ctx4096
+  - model_name: granite-4.0-h-tiny-q4_k_m:ctx8192
     litellm_params:
-      model: ollama/mistral-7b-instruct-v0.3-q4_k_m:ctx8192
+      model: ollama/granite-4.0-h-tiny-q4_k_m:ctx8192
+
+  # Qwen3-VL 4B (vision; paired with mmproj)
+  - model_name: qwen3-vl-4b-instruct-q4_k_m:ctx4096
+    litellm_params:
+      model: ollama/qwen3-vl-4b-instruct-q4_k_m:ctx4096
+  - model_name: qwen3-vl-4b-instruct-q4_k_m:ctx8192
+    litellm_params:
+      model: ollama/qwen3-vl-4b-instruct-q4_k_m:ctx8192
